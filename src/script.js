@@ -3486,7 +3486,7 @@ for (let i = 0; i < navTabs.length; i++) {
 }
 
 // Link
-const contactSection = document.querySelector('.slider')
+const contactSection = document.querySelector('#contactSection')
 const emailText = document.querySelector('#emailText')
 
 emailText.addEventListener('mouseenter', () => {
