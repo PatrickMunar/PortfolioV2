@@ -51,7 +51,7 @@ const loadingManager = new THREE.LoadingManager(
 )
 
 // EnvMap
-const cubeTextureLoader = new THREE.CubeTextureLoader()
+const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 const environmentMap = cubeTextureLoader.load([
     '/textures/environmentMaps/3/px.jpg',
     '/textures/environmentMaps/3/nx.jpg',
