@@ -1,0 +1,278 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: #1e1a20;
+    font-size: 1vh;
+    color: white;
+}
+
+@media (orientation:portrait) {
+    html {
+        font-size: 1.25vw;
+    }
+}
+@media (orientation:landscape) {
+    html {
+        font-size: 1.25vh;
+    }
+}
+
+
+/* html,
+body
+{
+    overflow: hidden;
+} */
+
+body {
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    outline: none;
+    box-sizing: border-box;
+    /* border: 2px solid black; */
+}
+
+.infoModal {
+    height: 100vh;
+    width: 30rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: transparent;
+    /* border-radius: 2rem 2rem 0rem 0rem; */
+    color: white;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    display: none;
+}
+
+.infoModalMain {
+    height: calc(100% - 5vh);
+    width: 30rem;
+    right: 0;
+    top: 0;
+    position: absolute;
+    background-color: transparent;
+    /* border-radius: 2rem 2rem 0rem 0rem; */
+    /* padding: 2rem; */
+    color: white;
+    box-sizing: border-box;
+    /* display: none; */
+    /* border: 2px solid blue; */
+}
+
+.redStrip {
+    height: 95%;
+    width: 7.5rem;
+    position: absolute;
+    /* right: 10vh; */
+    left: 2rem;
+    top: 0;
+    background-color: rgb(200, 0, 0);
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 200;
+    /* box-shadow: 0px 3px 3px black; */
+    /* border: 2px solid blue; */
+}
+
+.h1Div {
+    font-size: 3.5rem;
+    /* font-style: italic; */
+    margin-bottom: 4rem;
+    font-weight: bold;
+    /* text-shadow: 3px 3px 1px black; */
+}
+
+.h3Div {
+    font-size: 1.5rem;
+    /* font-style: italic; */
+    /* margin-left: 3vw; */
+    text-align: right;
+    /* text-shadow: 3px 3px 1px black; */
+    font-weight: bold;
+    color: white;
+}
+
+.h3Div2 {
+    font-size: 2rem;
+    /* font-style: italic; */
+    /* margin-left: 3vw; */
+    text-align: left;
+    /* text-shadow: 3px 3px 1px black; */
+    font-weight: bold;
+    color: white;
+}
+
+.redText {
+    font-weight: bold;
+    color: red;
+}
+
+.contentGrey {
+    height: calc(100% - 5vh);
+    width: 30rem;
+    position: absolute;
+    right: 5rem;
+    top: 5vh;
+    background-color: #121617;
+    /* border-radius: 2rem 2rem 0rem 0rem; */
+    color: red;
+    box-sizing: border-box;
+    /* display: none; */
+    /* border: 2px solid blue;  */
+    z-index: 150;
+    padding: 2rem;
+}
+
+.contentRed {
+    height: 100vh;
+    width: 30rem;
+    position: relative;
+    right: calc(5rem + 2rem);
+    top: 5vh;
+    background-color: transparent;
+    /* border-radius: 2rem 2rem 0rem 0rem; */
+    color: white;
+    /* text-shadow: 3px 3px 1px black; */
+    box-sizing: border-box;
+    /* display: none; */
+    /* border: 2px solid blue;  */
+    z-index: 100000;
+    padding: 2rem;
+
+}
+
+::selection {
+    background-color: transparent;
+  }
+
+.closer {
+    z-index: 1000;
+    position: absolute;
+    right: 1vh;
+    top: 1vh;
+    cursor: pointer;
+}
+
+.display {
+    display: block;
+}
+
+@keyframes insertAnimationFromBelow {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes insertAnimationFromAbove {
+    0% {
+        opacity: 0;
+        transform: translateY(-100vh);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes stay {
+    0% {
+        opacity: 0;
+        transform: translateY(200vh);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.displayGrey {
+    animation: insertAnimationFromBelow 1s forwards;
+}
+
+.displayRed {
+    animation: insertAnimationFromAbove 1s forwards;
+}
+
+.stay {
+    animation: stay 1s forwards;
+}
+
+.displayGreyx {
+    animation: insertAnimationFromBelowx 0.5s forwards;
+}
+
+.displayRedx {
+    animation: insertAnimationFromAbovex 0.5s forwards;
+}
+
+.stayx {
+    animation: stayx 0.5s forwards;
+}
+
+@keyframes insertAnimationFromBelowx {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes insertAnimationFromAbovex {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh);
+    }
+}
+
+@keyframes stayx {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    40% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(200vh);
+    }
+}
+
+/*# sourceMappingURL=main.css.map*/

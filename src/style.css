@@ -1,0 +1,875 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::selection {
+    background-color: red;
+}
+
+.message::selection {
+    color: red;
+    background-color: transparent;
+}
+
+@media (orientation: landscape) {
+    .botLanding {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        font-size: 1rem;
+        padding-left: 1.25rem;
+        padding-bottom: 1.25rem;
+        font-family: 'Nunito', sans-serif;
+        text-align: left;
+    }
+
+    .middleAlways {
+        position: absolute;
+        width: 100vw;
+        height: 50vh;
+        
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @media screen and ( max-width: 1400px ) {
+        html {
+            font-size: 30px;
+        }
+
+        .portName {
+            width: 100%;
+            /* height: 10.5vh; */
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            font-family: 'Spectral', serif;
+            white-space: nowrap;
+        }
+        
+        .portNameUnderline {
+            border-bottom: 2px solid red;
+            background-color: red;
+            position: relative;
+            width: 100%;
+            height: 2px;
+            top: 0;
+            left: 0;
+            transform-origin: left;
+        }
+        
+        .portType {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            font-size: 0.35rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            
+        }
+        
+        .portDescription {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            font-size: 0.5rem;
+        }
+        
+        .portTasks {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            font-size: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .portNotes {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            min-height: 5vh;
+            font-size: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .portSkills {
+            font-family: 'Spectral', serif;
+            width: 100%;
+            min-height: 5vh;
+            font-size: 0.3rem;
+        }
+
+        .extraSkillsTextSize {
+            font-size: 0.7rem;
+        }
+        .navTabs {
+            font-size: 0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .topLanding {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 3rem;
+            padding-left: 1rem;
+            padding-right: 0rem;
+            padding-bottom: 0rem;
+        }
+
+        .scrollTop {
+            position: absolute;
+            font-size: 2rem;
+             font-family: 'Spectral', serif;
+            /* -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: red; */
+            color: white;
+            box-sizing: border-box;
+            
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0px 0px 1px red, 0px -0px 1px red, -0px -0px 1px red, -0px 0px 1px red;
+        }
+        
+        .scrollBottom {
+            position: absolute;
+            font-size: 2rem;
+             font-family: 'Spectral', serif;
+            /* -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: black; */
+            color: white;
+            box-sizing: border-box;
+            
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0px 0px 1px black, 0px -0px 1px black, -0px -0px 1px black, -0px 0px 1px black;
+        }
+        
+        .scrollMainText {
+            position: absolute;
+            font-size: 2rem;
+             font-family: 'Spectral', serif;
+            /* -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: black; */
+            color: black;
+            box-sizing: border-box;
+            
+            text-align: center;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 2px 2px 1px black, 2px -2px 1px black, -2px -2px 1px black, -2px 2px 1px black;
+        }
+        .sliderTextSize {
+            font-size: 1rem;
+            white-space: nowrap;  
+        }
+        .topDescription {
+            font-size: 0.5rem;
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+        
+        .botDescription {
+            font-size: 0.5rem;
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+        
+        .sideNote {
+            font-size: 0.4rem;
+            text-align: center;
+            font-style: italic;
+            font-family: 'Merriweather', serif;
+        }
+    }
+    @media screen and ( min-width: 1400px ) {
+        html {
+            font-size: 50px;
+        }
+
+        .portName {
+            width: 100%;
+            /* height: 10.5vh; */
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+            font-family: 'Spectral', serif;
+            white-space: nowrap;
+        }
+
+        .portNameUnderline {
+            border-bottom: 2px solid red;
+            background-color: red;
+            position: relative;
+            width: 100%;
+            height: 2px;
+            top: 0;
+            left: 0;
+            transform-origin: left;
+        }
+
+        .portType {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            font-size: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            
+        }
+
+        .portDescription {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            font-size: 0.75rem;
+        }
+
+        .portTasks {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            font-size: 0.65rem;
+            margin-bottom: 0.65rem;
+        }
+
+        .portNotes {
+            font-family: 'Nunito', sans-serif;
+            width: 100%;
+            min-height: 5vh;
+            font-size: 0.5rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .portSkills {
+            font-family: 'Spectral', serif;
+            width: 100%;
+            min-height: 5vh;
+            font-size: 0.6rem;
+        }
+
+        .extraSkillsTextSize {
+            font-size: 1rem;
+        }
+        .navTabs {
+            font-size: 0.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .topLanding {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            padding-bottom: 0rem;
+            
+        }
+        .scrollTop {
+            position: absolute;
+            font-size: 3rem;
+             font-family: 'Spectral', serif;
+            /* -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: red; */
+            color: white;
+            box-sizing: border-box;
+            
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 2px 2px 2px red, 2px -2px 2px red, -2px -2px 2px red, -2px 2px 2px red;
+        }
+        
+        .scrollBottom {
+            position: absolute;
+            font-size: 3rem;
+             font-family: 'Spectral', serif;
+            /* -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: black; */
+            color: white;
+            box-sizing: border-box;
+            
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0px 0px 1px black, 0px -0px 1px black, -0px -0px 1px black, -0px 0px 1px black;
+        }
+        
+        .scrollMainText {
+            position: absolute;
+            font-size: 3rem;
+             font-family: 'Spectral', serif;
+            /* -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: black; */
+            color: black;
+            box-sizing: border-box;
+            
+            text-align: center;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 0px 0px 1px black, 0px -0px 1px black, -0px -0px 1px black, -0px 0px 1px black;
+        }
+        .sliderTextSize {
+            font-size: 3rem;
+            white-space: nowrap;
+        }
+        .topDescription {
+            font-size: 0.75rem;
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+        
+        .botDescription {
+            font-size: 0.75rem;
+            text-align: right;
+            margin-bottom: 1rem;
+        }
+        
+        .sideNote {
+            font-size: 0.55rem;
+            text-align: center;
+            font-style: italic;
+            font-family: 'Merriweather', serif;
+        }
+    }
+  }
+  
+  @media (orientation: portrait) {
+    html {
+        font-size: 20px;
+    }
+
+    .portName {
+        width: 100%;
+        /* height: 10.5vh; */
+        font-size: 2rem;
+        margin-bottom: 0.25rem;
+        font-family: 'Spectral', serif;
+        white-space: nowrap;
+    }
+    
+    .portNameUnderline {
+        border-bottom: 2px solid red;
+        background-color: red;
+        position: relative;
+        width: 100%;
+        height: 2px;
+        top: 0;
+        left: 0;
+        transform-origin: left;
+    }
+    
+    .portType {
+        font-family: 'Nunito', sans-serif;
+        width: 100%;
+        font-size: 0.5rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        
+    }
+    
+    .portDescription {
+        font-family: 'Nunito', sans-serif;
+        width: 100%;
+        font-size: 0.75rem;
+    }
+    
+    .portTasks {
+        font-family: 'Nunito', sans-serif;
+        width: 100%;
+        font-size: 0.65rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .portNotes {
+        font-family: 'Nunito', sans-serif;
+        width: 100%;
+        min-height: 5vh;
+        font-size: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .portSkills {
+        font-family: 'Spectral', serif;
+        width: 100%;
+        min-height: 5vh;
+        font-size: 0.5rem;
+    }    
+
+    .topSkillsMove {
+        padding-top: 10rem;
+    }
+    .botSkillsMove {
+        padding-bottom: 10rem;
+    }
+    .extraSkillsTextSize {
+        font-size: 1rem;
+    }
+    .navTabs {
+        font-size: 0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        pointer-events: auto;
+        cursor: pointer;
+    }
+    .botLanding {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        font-size: 1rem;
+        padding-left: 1.25rem;
+        padding-bottom: 14rem;
+        font-family: 'Nunito', sans-serif;
+        text-align: left;
+    }
+    .topLanding {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 2.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 0rem;
+        padding-top: 10rem;
+    }
+
+    .middleAlways {
+        position: absolute;
+        width: 100vw;
+        height: 50vh;
+        
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 10rem;
+    }
+
+    .scrollTop {
+        position: absolute;
+        font-size: 2rem;
+         font-family: 'Spectral', serif;
+        /* -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: red; */
+        color: white;
+        box-sizing: border-box;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 0px 0px 1px red, 0px -0px 1px red, -0px -0px 1px red, -0px 0px 1px red;
+    }
+    
+    .scrollBottom {
+        position: absolute;
+        font-size: 2rem;
+         font-family: 'Spectral', serif;
+        /* -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black; */
+        color: white;
+        box-sizing: border-box;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 0px 0px 1px black, 0px -0px 1px black, -0px -0px 1px black, -0px 0px 1px black;
+    }
+    
+    .scrollMainText {
+        position: absolute;
+        font-size: 2rem;
+         font-family: 'Spectral', serif;
+        /* -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black; */
+        color: black;
+        box-sizing: border-box;
+        
+        text-align: center;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 0px 0px 1px black, 0px -0px 1px black, -0px -0px 1px black, -0px 0px 1px black;
+    }
+    .sliderTextSize {
+        font-size: 1.5rem;
+        white-space: nowrap;
+    }
+    .topDescription {
+        font-size: 0.9rem;
+        text-align: left;
+        margin-bottom: 7rem;
+    }
+    
+    .botDescription {
+        font-size: 0.9rem;
+        text-align: right;
+        margin-bottom: 1rem;
+    }
+    
+    .sideNote {
+        font-size: 0.75rem;
+        text-align: center;
+        font-style: italic;
+        font-family: 'Merriweather', serif;
+    }
+  }
+
+body {
+    background-color: white;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    z-index: 100;
+    font-size: 10px;
+    box-sizing: border-box;
+    /* text-shadow: 1px 1px white, -1px -1px white, -1px 1px white, 1px -1px white ; */
+}
+
+.mainCanvas
+{
+    position: fixed;
+    outline: none;
+    box-sizing: border-box;
+    /* border: 5px solid blue; */
+    z-index: 1000;
+    /*  */
+}
+
+/* Slider */
+.slider {
+    position: absolute;
+    z-index: 10000;
+}
+
+.section {
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#portfolioSection {
+    height: 600vh;
+}
+
+.portfolioEntry {
+    width: 100vw;
+    height: 100vh;
+    /* border: 2px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.portfolioTextDiv {
+    width: 40vw;
+    height: 100vh;
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 1rem;
+}
+
+.back {
+    z-index: 1;
+}
+
+.top {
+    z-index: 10000;
+}
+
+.half {
+    height: 50vh;
+    width: 100vw;
+}
+
+/* Pointers */
+#landingSection {
+    pointer-events: none;
+}
+
+/* Extra */
+#extraSection {
+    height: 200vh;
+    justify-content: flex-start;
+}
+
+.middleScrollDiv {
+    height: 100vh;
+    width: 100vw;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.topSliderText {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 50vh;
+    top: 0;
+    z-index: 1000;
+    font-family: 'Spectral', serif;
+}
+
+.botSliderText {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 50vh;
+    color: black;
+    bottom: 0;
+    z-index: 1000;
+    font-family: 'Spectral', serif;
+}
+
+.leftSliderText {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 100vh;
+    left: 0;
+    bottom: 0;
+    z-index: 900;
+    text-align: right;
+    padding-top: 10vh;
+    font-family: 'Spectral', serif;
+
+}
+
+.rightSliderText {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20vw;
+    height: 100vh;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    text-align: left;
+    padding-bottom: 10vh;
+    font-family: 'Spectral', serif;
+
+}
+
+/* Room */
+.roomList {
+    width: 25vw;
+    height: 90vh;
+    font-family: 'Spectral', serif;
+    /* border: 2px solid black; */
+}
+
+.listItem {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 0.6rem;
+    padding-left: 1rem;
+    pointer-events: auto;
+    cursor: pointer;
+    /* white-space: nowrap; */
+    /* border: 2px solid black; */
+}
+
+.roomDescription {
+    width: 27.5vw;
+    height: 100vh;
+    /* border: 2px solid black; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Nunito', sans-serif;
+}
+
+.descriptionDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 30vw;
+    height: 100vh;
+    position: absolute;
+    top: 100vh;
+    /* border: 2px solid red; */
+    width: 30vw;
+    padding-right: 1rem;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+#roomSection {
+    pointer-events: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.chosen {
+    backdrop-filter: invert(100%);
+    color: white;
+}
+
+/* Skills */
+.topSkillsText {
+    width: 100vw;
+    height: 50vh;
+    position: absolute;
+    top: 200vh;
+    left: 0;
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+}
+
+.botSkillsText {
+    width: 100vw;
+    height: 50vh;
+    position: absolute;
+    top: 250vh;
+    left: 0;
+    /* border: 2px solid blue; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+}
+
+/* Nav */
+.navBar {
+    width: 100vw;
+    z-index: 1000000;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    /* border: 2px solid red; */
+    pointer-events: none;
+    font-family: 'Raleway', sans-serif;
+}
+
+.currentTab {
+    backdrop-filter: invert(100%);
+    color: white;
+}
+
+
+.sideSliderTextSize {
+    font-size: 0.8rem;
+}
+
+/* Scroll Bar */
+/* width */
+::-webkit-scrollbar {
+width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background-color: rgba(150, 150, 150, 0.5);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: black;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    backdrop-filter: invert(100%);
+}
+
+/* Fonts */
+.Oi {
+    font-family: 'Spectral', serif;
+}
+
+.back {
+    position: absolute;
+}
+
+.link {
+    font-size: 1rem;
+    font-family: 'Spectral', serif;
+    /* text-decoration: none; */
+    color: black;
+}
+
+.link:hover {
+    backdrop-filter: invert(100%);
+    color: white;
+    text-decoration: none;
+}
+
+.negative {
+    backdrop-filter: invert(100%);
+    color: white;
+}
+
+.positive {
+    color: black;
+}
+
+/* Loading Page */
+.loadingPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    z-index: 100000000000000000000000000;
+}

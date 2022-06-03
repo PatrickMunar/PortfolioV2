@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Patrick Munar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Frank+Ruhl+Libre&family=Merriweather:wght@200&family=Nunito:wght@400&family=Oi&family=Orbitron&family=Raleway:wght@500&family=Spectral:ital,wght@1,800&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.3/ScrollTrigger.min.js"></script>	
+</head>
+<body>
+    <div class="loadingPage">Mini Survey</div>
+
+    <div class="back half topLanding">
+        <div class="large Oi">Hel<t class="message">l</t>o.</div>
+        <div class="large Oi">am</div>
+        <div class="middleAlways"><t class="message Oi">i</t></div>
+    </div>
+ 
+    <canvas class="mainCanvas"></canvas>
+    <div class="navBar">
+        <div class="navTabs currentTab" id="nav1">HELLO</div>
+        <div class="navTabs" id="nav2">ABOUT ME</div>
+        <div class="navTabs" id="nav3">SKILLS</div>
+        <div class="navTabs" id="nav4">PROJECTS</div>
+        <div class="navTabs" id="nav5">CONTACT</div>
+    </div>
+    <div class="slider">
+        <div class="section" id="landingSection">
+            <div class="half topLanding">
+                <div class="middleAlways"><t class="message Oi">i</t></div>
+            </div>
+            <div class="front half botLanding">
+                <div class="left">
+                    a<t class="flicker">n aspiring</t><br>creati<t class="message">v</t>e front-<t class="message">e</t>nd deve<t class="message">l</t>oper & eng<t class="message">i</t>neer<br><t class="message">f</t>rom th<t class="message">e</t>&nbsp;Philippines.
+                </div>
+            </div>
+        </div>
+        <div class="section" id="roomSection">
+            <div class="roomList">
+                <div class="listItem" id="tech">Tech</div>
+                <div class="listItem" id="threeD">3D</div>
+                <div class="listItem" id="ed">Education</div>
+                <div class="listItem" id="draw">Drawing</div>
+                <div class="listItem" id="game">Gaming</div>
+                <div class="listItem" id="mns">Movies & Series</div>
+                <div class="listItem" id="music">Music</div>
+                <div class="listItem" id="ff">Flag Football</div>
+                <div class="listItem" id="chess">Chess</div>
+                <div class="listItem" id="skate">Skate</div>
+            </div>
+            <div class="roomDescription">
+                <div class="descriptionDiv" id="default">
+                    <div class="topDescription">Get to know me better through this room.</div>
+                    <div class="botDescription">Explore and click on objects.</div>
+                    <div class="sideNote">(or pick one from the list)</div>
+                </div>
+                <div class="descriptionDiv hidden" id="techDesc">
+                    <div class="topDescription">I mainly code with the holy trinity of web development:<br>HTML, CSS & JavaScript.</div>
+                    <div class="botDescription">I love incorporating 3D models and animations<br>with Three.js, GLSL & GSAP.</div>
+                    <div class="sideNote">It's always the little things that make a site awesome.</div>
+                </div>
+                <div class="descriptionDiv hidden" id="threeDDesc">
+                    <div class="topDescription">I design and create 3D Models with Fusion 360.</div>
+                    <div class="botDescription">With Blender and Inkscape, these models can be put on the web.</div>
+                    <div class="sideNote">We live in a 3D world after all.</div>
+                </div>
+                <div class="descriptionDiv hidden" id="edDesc">
+                    <div class="topDescription">University of the Philippines - Diliman<br>2021<br>BS Mechanical Engineering</div>
+                    <div class="botDescription">Philippine Science High School - Central Luzon Campus<br>2015</div>
+                    <div class="sideNote">Three.js Journey by Bruno Simon is what started my fascination with 3D web.</div>
+                </div>
+                <div class="descriptionDiv hidden" id="drawDesc">
+                    <div class="topDescription">Growing up, I've always had a pencil and a piece of paper with me. I'd draw all my favorite cartoon and anime characters.</div>
+                    <div class="botDescription">I drew for myself knowing that nothing's impossible on a canvas.</div>
+                    <div class="sideNote">“We all have 10,000 bad drawings in us. The sooner we get them out the better.”<br>- Walt Stanchfield</div>
+                </div>
+                <div class="descriptionDiv hidden" id="gameDesc">
+                    <div class="topDescription">Am an avid gamer for sure. From old Nintendo games to Triple-A PC games, I played a ton.</div>
+                    <div class="botDescription">I'm also interested in game development and will work on a kick-ass game in the future.</div>
+                    <div class="sideNote">"Games were not just a diversion, I realized. Games could make you feel."<br>- Sid Meier.</div>
+                </div>
+                <div class="descriptionDiv hidden" id="mnsDesc">
+                    <div class="topDescription">There's always something playing on a screen near me.</div>
+                    <div class="botDescription">I enjoy watching murder-mysteries, horror, comedies, superhero, and documentaries.</div>
+                    <div class="sideNote">“I guess it comes down to a simple choice, really: Get busy living, or get busy dying.”<br>- Andy Dufresne</div>
+                </div>
+                <div class="descriptionDiv hidden" id="musicDesc">
+                    <div class="topDescription">Background music doesn't just exist in movies or games; it's also in real life.</div>
+                    <div class="botDescription">Music quite literally keeps me going. Whenever I go to class or when I study, it's always there.</div>
+                    <div class="sideNote">"Music is the literature of the heart; it commences where speech ends."<br>- Alphonse de Lamartine</div>
+                </div>
+                <div class="descriptionDiv hidden" id="ffDesc">
+                    <div class="topDescription">Made a lot of fun memories with the University of the Philippines Flag Football Club</div>
+                    <div class="botDescription">Flag football showed me what it really means to be part of a team.</div>
+                    <div class="sideNote">I've played a lot of sports in my life, but flag football is like no other.</div>
+                </div>
+                <div class="descriptionDiv hidden" id="chessDesc">
+                    <div class="topDescription">Been playing since elementary school and I hadn't stopped since.</div>
+                    <div class="botDescription">I'm just an average player at best, but I do appreciate the beauty of the game.</div>
+                    <div class="sideNote">“Chess is a war over the board. The object is to crush the opponent's mind.”<br>- Bobby Fischer</div>
+                </div>
+                <div class="descriptionDiv hidden" id="skateDesc">
+                    <div class="topDescription">There's this freedom in skateboarding. It teaches you to overcome your fear.</div>
+                    <div class="botDescription">I hopped back on just recently and it still will give you the joy every single time.</div>
+                    <div class="sideNote">"Skateboarding is a meditation."<br>- Rodney Mullen</div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="extraSection">
+            <div class="middleScrollDiv">
+                <div class="topSliderText sliderTextSize">HTML + CSS + JavaScript</div>
+                <div class="botSliderText sliderTextSize">GLSL + Three.js + GSAP</div>
+                <div class="leftSliderText sideSliderTextSize">Learning<br> React,</div>
+                <div class="rightSliderText sideSliderTextSize">R3F,<br>and shaders</div>
+                
+                <div class="scrollTop" id="scrollTop1">FRONT-END</div>
+                <div class="scrollTop" id="scrollTop2">FRONT-END</div>
+                <div class="scrollTop" id="scrollTop3">FRONT-END</div>
+                <div class="scrollTop" id="scrollTop4">FRONT-END</div>
+                <div class="scrollMainText">FRONT-END</div>
+                <div class="scrollBottom" id="scrollBottom1">FRONT-END</div>
+                <div class="scrollBottom" id="scrollBottom2">FRONT-END</div>
+                <div class="scrollBottom" id="scrollBottom3">FRONT-END</div>
+                <div class="scrollBottom" id="scrollBottom4">FRONT-END</div>
+            </div>
+            <div class="topSkillsText topSkillsMove extraSkillsTextSize">It's amazing to think<br>that a few lines of code can<br>allow us to create something tangible,<br>with a few more, something beautiful</div>
+            <div class="botSkillsText botSkillsMove  extraSkillsTextSize">— and with the right tools,<br>something unforgettable.<br><br></div>
+        </div>
+        <div id="portfolioSection">
+            <div class="portfolioEntry" id="entry1">
+                <div class="portfolioTextDiv">
+                    <div class="portName">Flagle <div class="portNameUnderline" id="underline1"></div> </div>
+                    <div class="portType"><t class="sb">Public Project</t> <t class="sb">Collab with Simon Clemente</t></div>
+                    <div class="portDescription">Flagle is basically a guess-who game for flags.</div>
+                    <div class="portTasks">- Conceptualized game mechanics & features<br>- Mainly worked on the layout, design and content of the site.</div>
+                    <div class="portNotes">My first ever live project that has already reached over 200,000 people across the world.</div>
+                    <div class="portSkills">HTML + CSS + JavaScript</div>
+                </div>
+            </div>
+            <div class="portfolioEntry" id="entry2">
+                <div class="portfolioTextDiv">
+                    <div class="portName">Gabito<div class="portNameUnderline" id="underline2"></div> </div>
+                    <div class="portType"><t class="sb">UI Study</t> <t class="sb">Collab with Gabriel Pineda</t></div>
+                    <div class="portDescription">A UI case study for implementing a non-conventional image carousel.</div>
+                    <div class="portTasks">- Dived deeper into vertex shaders, animations and interactions.<br>- Visualized overall carousel and rough website look.</div>
+                    <div class="portNotes">Conclusions: The carousel is a refreshing concept for image displays. Text or content will greatly improve the flow and overall look of the website.</div>
+                    <div class="portSkills">HTML + CSS + JavaScript + GLSL + Three.js + GSAP</div>
+                </div>
+            </div>
+            <div class="portfolioEntry" id="entry3">
+                <div class="portfolioTextDiv">
+                    <div class="portName">LD+R<div class="portNameUnderline" id="underline3"></div> </div>
+                    <div class="portType"><t class="sb">UI Study</t></div>
+                    <div class="portDescription">A UI concept for Love Death + Robots' best episodes with a highlight object(orange robot).</div>
+                    <div class="portTasks">- Modelled the robot to continuously animate and change screen texture.<br>- Implemented a lot of GSAP animations and ScrollTriggers to correctly manipulate the robot.</div>
+                    <div class="portNotes">Conclusions: The robot head can make the user feel a sense of vastness in the website specially since it is set in outer space. The robot transition and screen animations give life to the site.</div>
+                    <div class="portSkills">HTML + CSS + JavaScript + GLSL + Three.js + GSAP</div>
+                </div>
+            </div>
+            <div class="portfolioEntry" id="entry4">
+                <div class="portfolioTextDiv">
+                    <div class="portName">Nacho<div class="portNameUnderline" id="underline4"></div> </div>
+                    <div class="portType"><t class="sb">Design Study</t></div>
+                    <div class="portDescription">A challenge to design and create a website with Nacho Varga as the subject in only 24 hours.</div>
+                    <div class="portTasks">- Came up with the theme, colors and fonts, so I had to experiment a lot on those.<br>- Implemented a ripple and texture-change effect on meshes.</div>
+                    <div class="portNotes">Conclusions: Designing a website is a completely different and equally important field in web development. This exercise has given me a general sense of how I design websites.</div>
+                    <div class="portSkills">HTML + CSS + JavaScript + GLSL + Three.js + GSAP</div>
+                </div>
+            </div>
+            <div class="portfolioEntry" id="entry5">
+                <div class="portfolioTextDiv">
+                    <div class="portName">Noise Generator<div class="portNameUnderline" id="underline5"></div> </div>
+                    <div class="portType"><t class="sb">Shader Study</t></div>
+                    <div class="portDescription">A website to create and better understand Noise and Fragment Shaders.</div>
+                    <div class="portTasks">- Tweaked a lot of values and ran the code multiple times to really understand what was happening with the fragment shader.<br>- Created a simple UI to allow users to change values and see results on the spot.</div>
+                    <div class="portNotes">Conclusions: I found noise to be pretty fascinating. There's something about the chaos that is just beautiful to me. Will definitely try to implement them in a project soon.</div>
+                    <div class="portSkills">HTML + CSS + JavaScript + GLSL + Three.js</div>
+                </div>
+            </div>
+            <div class="portfolioEntry" id="entry6">
+                <div class="portfolioTextDiv">
+                    <div class="portName">Portfolio v2<div class="portNameUnderline" id="underline6"></div> </div>
+                    <div class="portType"><t class="sb">Public Project</t></div>
+                    <div class="portDescription">An accumulation of what I've learned so far and some of the products of it.</div>
+                    <div class="portTasks">- Designed the whole website from top to bottom.<br>- Used GSAP and ScrollTriggers to ensure that animations are done on time.<br>- Created all 3D assets and managed everything so that users can have an immersive and interactive experience.</div>
+                    <div class="portNotes">I really enjoyed working on this and I believe that it represents me well as an individual and as a developer.</div>
+                    <div class="portSkills">HTML + CSS + JavaScript + GLSL + Three.js + GSAP</div>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="contactSection">
+            <a href="mailto:rptmunar@gmail.com" class="link" tabindex="-1" id="emailText">Wanna talk?</a>
+        </div>
+    </div>
+</body>
+</html>
