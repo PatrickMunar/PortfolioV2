@@ -50,6 +50,18 @@ const loadingManager = new THREE.LoadingManager(
     }
 )
 
+// EnvMap
+const cubeTextureLoader = new THREE.CubeTextureLoader()
+const environmentMap = cubeTextureLoader.load([
+    '/textures/environmentMaps/3/px.jpg',
+    '/textures/environmentMaps/3/nx.jpg',
+    '/textures/environmentMaps/3/py.jpg',
+    '/textures/environmentMaps/3/ny.jpg',
+    '/textures/environmentMaps/3/pz.jpg',
+    '/textures/environmentMaps/3/nz.jpg'
+])
+
+
 // Texture loader
 const textureLoader = new THREE.TextureLoader(loadingManager)
 const pictures = []
@@ -186,6 +198,8 @@ let blackChess = new THREE.Group
 let lotus = new THREE.Group
 let lotusOrb = new THREE.Group
 
+
+
 const allObjectsArray = []
 
 allObjects.add(bottomBedframeGroup)
@@ -282,11 +296,20 @@ lotus.rotation.z = -Math.PI/12
 lotus.rotation.x = Math.PI/3
 lotus.rotation.y = Math.PI/4
 // lotus.position.set(0,-17.5,0)
-lotus.add(lotusOrb)
 const lotusGroup = new THREE.Group
 lotusGroup.position.set(-3,-15.5,0)
 lotusGroup.add(lotus)
 mainScene.add(lotusGroup)
+
+lotus.add(lotusOrb)
+
+const addOrb = () => {
+    lotusOrb.position.z = 0
+}
+
+const removeOrb = () => {
+    lotusOrb.position.z = -100000
+}
 
 // Phase 0 GLTFLoader
 gltfLoader.load(
@@ -457,6 +480,8 @@ gltfLoader.load(
         obj.scene.children[0].castShadow = true
         obj.scene.children[0].receiveShadow = true
         obj.scene.children[0].frustumCulled = false
+        obj.scene.children[0].material.envMap = environmentMap
+        obj.scene.children[0].material.envMapIntensity = 2
     }
 )
 
@@ -2689,7 +2714,7 @@ let diffBoxCount = 0
 const makeBox = (i, j) => {
     const boxGeometry = new THREE.BoxGeometry( 0.7, 0.7, 0.7 )
     const boxEdges = new THREE.EdgesGeometry( boxGeometry )
-    const colorChance = Math.floor(Math.random()*6)
+    const colorChance = Math.floor(Math.random()*11)
     let boxColor = boxColors[0]
     if (colorChance == 0) {
         boxColor = boxColors[1]
@@ -2722,6 +2747,7 @@ const makeBox = (i, j) => {
 
 
 makeBox(iBox, jBox)
+mainCameraGroup.add(boxLineGroup)
 mainScene.add(boxLineGroup)
 
 
@@ -2744,7 +2770,15 @@ const tick = () =>
     // Lotus
     lotus.rotation.y +=0.01
     lotusOrb.position.y = Math.sin(elapsedTime) * 0.2
+    
+    if (scrollY >= window.innerHeight*2.5) {
+        addOrb()
+    }
+    else if (scrollY < window.innerHeight*2.5){
+        removeOrb()
+    }
 
+    // Camera
     if (scrollY < window.innerHeight*4) {
         mainCamera.position.y = 5 - scrollY / sizes.height * sectionDistance
     }
@@ -2770,8 +2804,11 @@ const tick = () =>
     }
 
     // Parallax
-    const parallaxX = mouse.x * 0.05
-    const parallaxY = -mouse.y * 0.05
+    const parallaxX = mouse.x * 0.025
+    const parallaxY = -mouse.y * 0.025
+
+    mainCameraGroup.position.y += ( -parallaxY - mainCameraGroup.position.y )
+    mainCameraGroup.position.x += ( parallaxX - mainCameraGroup.position.x )
     
     if (spinBox == false) {
         for (let i = 0; i < boxesArray.length; i++) {
@@ -3160,7 +3197,7 @@ gsap.to(lotusGroup.rotation , {
         start: () =>  window.innerHeight*1 + ' bottom',
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
-        scrub: 2,
+        scrub: true,
         // pin: true,
         // markers: true
     },
@@ -3449,7 +3486,7 @@ for (let i = 0; i < navTabs.length; i++) {
 }
 
 // Link
-const contactSection = document.querySelector('#contactSection')
+const contactSection = document.querySelector('.slider')
 const emailText = document.querySelector('#emailText')
 
 emailText.addEventListener('mouseenter', () => {

@@ -333,13 +333,13 @@
             white-space: nowrap;
         }
         .topDescription {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             text-align: left;
             margin-bottom: 1rem;
         }
         
         .botDescription {
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             text-align: right;
             margin-bottom: 1rem;
         }
@@ -671,9 +671,8 @@ body {
     bottom: 0;
     z-index: 900;
     text-align: right;
-    padding-top: 10vh;
+    padding-top: 0;
     font-family: 'Spectral', serif;
-
 }
 
 .rightSliderText {
