@@ -46,7 +46,6 @@ const loadingManager = new THREE.LoadingManager(
     },
     // Progress
     (itemUrl, itemsLoaded, itemsTotal) => {
-        console.log(itemsLoaded/itemsTotal*100)
     }
 )
 
@@ -1627,7 +1626,6 @@ const roomAmbientLight = new THREE.AmbientLight(0xaaaaaa, opacities.roomAmb)
 mainScene.add(roomAmbientLight)
 
 const roomPointLight = new THREE.PointLight(0xaaaabb, opacities.room)
-roomPointLight.position.set(-10, 0, 15)
 roomPointLight.castShadow = true
 roomPointLight.shadow.mapSize.x = 1024*4
 roomPointLight.shadow.mapSize.y = 1024*4
@@ -1701,6 +1699,8 @@ mainCamera.position.set(0, 5, 10)
 mainCamera.fov = 45 * zoomFactor;
 mainCamera.updateProjectionMatrix();
 mainScene.add(mainCamera)
+mainCamera.add(roomPointLight)
+roomPointLight.position.set(-10, 10, 10)
 
 /**
  * Renderer
@@ -2524,7 +2524,7 @@ const parameters = {
 
 const waveClickParameters = {
     waveFrequency: 2,
-    waveAmplitude: 1
+    waveAmplitude: 0.25
 }
 
 const planeSize = {
@@ -2758,17 +2758,23 @@ const clock = new THREE.Clock()
 let firstCurrentIntersect = null
 let currentIntersect = null
 let noClicks = false
-let firstTimeRender = false
+
+let extraMeshRotation = 0
+let waveMeshIndex = 0
 
 let prevTime = 0
 let floatTime = 0
 
+let scrollIndex = scrollY/window.innerHeight
+
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // Time Updates
     
     // Lotus
-    lotus.rotation.y +=0.01
+    lotus.rotation.y +=0.005
     lotusOrb.position.y = Math.sin(elapsedTime) * 0.2
     
     if (scrollY >= window.innerHeight*2.5) {
@@ -2783,12 +2789,26 @@ const tick = () =>
         mainCamera.position.y = 5 - scrollY / sizes.height * sectionDistance
     }
 
-    carouselMesh1Group.rotation.x = -carouselGroup.rotation.x
-    carouselMesh2Group.rotation.x = -carouselGroup.rotation.x
-    carouselMesh3Group.rotation.x = -carouselGroup.rotation.x
-    carouselMesh4Group.rotation.x = -carouselGroup.rotation.x
-    carouselMesh5Group.rotation.x = -carouselGroup.rotation.x
-    carouselMesh6Group.rotation.x = -carouselGroup.rotation.x
+    scrollIndex = scrollY/window.innerHeight
+
+    extraMeshRotation = (Math.sin(scrollIndex*Math.PI*2)) * - Math.PI*10/180
+
+    // waveMeshIndex = Math.abs((Math.sin(scrollIndex*Math.PI))) * 0.25
+    // console.log(waveMeshIndex)
+
+    // c1material.uniforms.uAmplitude.value = waveMeshIndex
+    // c2material.uniforms.uAmplitude.value = waveMeshIndex
+    // c3material.uniforms.uAmplitude.value = waveMeshIndex
+    // c4material.uniforms.uAmplitude.value = waveMeshIndex
+    // c5material.uniforms.uAmplitude.value = waveMeshIndex
+    // c6material.uniforms.uAmplitude.value = waveMeshIndex
+
+    carouselMesh1Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation 
+    carouselMesh2Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation
+    carouselMesh3Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation
+    carouselMesh4Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation
+    carouselMesh5Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation
+    carouselMesh6Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation
 
     // 
     if (isBedUp == true) {
@@ -3176,7 +3196,10 @@ gsap.to('#portfolioSection' , {
     ease: 'none',
 })
 
-gsap.to(lotusGroup.position , {
+// Lotus
+gsap.to(lotusGroup.position, {x: -3, y: -15.5, z: 0})
+
+gsap.fromTo(lotusGroup.position , {x: -3, y: -15.5, z: 0}, {
     scrollTrigger: {
         trigger: '#extraSection',
         start: () =>  window.innerHeight*1 + ' bottom',
@@ -3202,6 +3225,68 @@ gsap.to(lotusGroup.rotation , {
         // markers: true
     },
     y: Math.PI*2
+    // ease: 'none',
+})
+
+gsap.fromTo(lotusGroup.position , {y: -25.5, x: 3.5, z: 0}, {
+    scrollTrigger: {
+        trigger: '#extraSection',
+        start: () =>  window.innerHeight*2 + ' bottom',
+        end: () =>  window.innerHeight*2 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    y: -35.5,
+    x: 0,
+    z: -5
+    // ease: 'none',
+})
+
+gsap.to(lotusGroup.rotation , {
+    scrollTrigger: {
+        trigger: '#extraSection',
+        start: () =>  window.innerHeight*2 + ' bottom',
+        end: () =>  window.innerHeight*2 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    y: Math.PI*2
+    // ease: 'none',
+})
+
+gsap.to(lotusGroup.rotation , {
+    scrollTrigger: {
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*0 + ' bottom',
+        end: () =>  window.innerHeight*0 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    y: -Math.PI,
+    x: Math.PI*0.9,
+    z: Math.PI
+    // ease: 'none',
+})
+
+gsap.fromTo(lotusGroup.position , {y: -35.5, x: 0, z: -5}, {
+    scrollTrigger: {
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*0 + ' bottom',
+        end: () =>  window.innerHeight*0 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    y: -52.5,
+    x: 0,
+    z: 0
     // ease: 'none',
 })
 

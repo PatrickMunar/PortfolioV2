@@ -27,13 +27,13 @@ void main() {
     float elevationY = 0.0;
     float elevationZ = 0.0;
 
-    // elevationX += sin(modelPosition.x * uFrequency + uTime * uOscillationFrequency) * 0.1 * uAmplitude;
-    // elevationY += sin(modelPosition.y * uFrequency + uTime * uOscillationFrequency) * 0.1 * uAmplitude;
-    // elevationZ += sin(modelPosition.z * uFrequency + uTime * uOscillationFrequency) * 0.1 * uAmplitude;
+    elevationY += sin(modelPosition.y * uFrequency + uTime * uOscillationFrequency) * 0.1 * uAmplitude;
+    // elevationY += sin(modelPosition.y * uFrequency + uTime * uOscillationFrequency) * 0.05 * uAmplitude;
+    // elevationZ += sin(modelPosition.y * uFrequency + uTime * uOscillationFrequency) * 0.1 * uAmplitude;
     // elevation += aRandom;
 
     // modelPosition.z += elevationY;
-    // modelPosition.z += elevationX;
+    modelPosition.y += elevationY;
     // modelPosition.y += elevationY;
     // modelPosition.x += elevationX;
 
