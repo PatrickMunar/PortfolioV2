@@ -52,12 +52,12 @@ const loadingManager = new THREE.LoadingManager(
 // EnvMap
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
 const environmentMap = cubeTextureLoader.load([
-    '/textures/environmentMaps/3/px.jpg',
-    '/textures/environmentMaps/3/nx.jpg',
-    '/textures/environmentMaps/3/py.jpg',
-    '/textures/environmentMaps/3/ny.jpg',
-    '/textures/environmentMaps/3/pz.jpg',
-    '/textures/environmentMaps/3/nz.jpg'
+    '/textures/environmentMaps/1/px.jpg',
+    '/textures/environmentMaps/1/nx.jpg',
+    '/textures/environmentMaps/1/py.jpg',
+    '/textures/environmentMaps/1/ny.jpg',
+    '/textures/environmentMaps/1/pz.jpg',
+    '/textures/environmentMaps/1/nz.jpg'
 ])
 
 
@@ -196,8 +196,7 @@ let whiteChess = new THREE.Group
 let blackChess = new THREE.Group
 let lotus = new THREE.Group
 let lotusOrb = new THREE.Group
-
-
+let contactCube = new THREE.Group
 
 const allObjectsArray = []
 
@@ -291,6 +290,8 @@ container.position.set(2.5*scaleFactor,0,0)
 cup.position.set(2.5*scaleFactor,0,0)
 wallet.position.set(2.5*scaleFactor,0,0)
 
+
+// Lotus Positions
 lotus.rotation.z = -Math.PI/12
 lotus.rotation.x = Math.PI/3
 lotus.rotation.y = Math.PI/4
@@ -309,6 +310,11 @@ const addOrb = () => {
 const removeOrb = () => {
     lotusOrb.position.z = -100000
 }
+
+// Contact Cube Positions
+mainScene.add(contactCube)
+contactCube.position.set(-5,-50.5,0)
+contactCube.rotation.y = Math.PI*0.5 + Math.PI/8
 
 // Phase 0 GLTFLoader
 gltfLoader.load(
@@ -481,6 +487,38 @@ gltfLoader.load(
         obj.scene.children[0].frustumCulled = false
         obj.scene.children[0].material.envMap = environmentMap
         obj.scene.children[0].material.envMapIntensity = 2
+    }
+)
+
+// Contact Cube
+gltfLoader.load(
+    'ContactCube.glb',
+    (obj) => {
+       
+        mainScene.add(obj.scene)
+        obj.scene.scale.set(0.1,0.1,0.1)
+
+        // 
+        contactCube.add(obj.scene)
+        // obj.scene.castShadow = true
+        obj.scene.children[0].castShadow = true
+        obj.scene.children[0].receiveShadow = true
+        obj.scene.children[0].frustumCulled = false
+        obj.scene.children[1].castShadow = true
+        obj.scene.children[1].receiveShadow = true
+        obj.scene.children[1].frustumCulled = false
+        obj.scene.children[2].castShadow = true
+        obj.scene.children[2].receiveShadow = true
+        obj.scene.children[2].frustumCulled = false
+        obj.scene.children[3].castShadow = true
+        obj.scene.children[3].receiveShadow = true
+        obj.scene.children[3].frustumCulled = false
+        obj.scene.children[4].castShadow = true
+        obj.scene.children[4].receiveShadow = true
+        obj.scene.children[4].frustumCulled = false
+        obj.scene.children[5].castShadow = true
+        obj.scene.children[5].receiveShadow = true
+        obj.scene.children[5].frustumCulled = false
     }
 )
 
@@ -2316,7 +2354,6 @@ const spinBoxAnim = () => {
         spinBox = false
     }, 1000)
     for (let i = 0; i < boxesArray.length; i++) {
-        // console.log(boxesArray[i].material.color)
         if (i%2 == 0) {
             if (spinCount%3 == 0) {
                 gsap.to(boxesArray[i].rotation, {duration: 1, x: boxesArray[i].rotation.x + Math.PI/2})
@@ -2349,7 +2386,14 @@ window.addEventListener('click', () => {
     // Raycasts
     if (isAnimationPlaying == false && noClicks == false) {
         if (firstCurrentIntersect) {
-            if (firstCurrentIntersect.object == P.children[0].children[0]) {
+            // Contact Cube
+            if (firstCurrentIntersect.object == contactCube.children[0].children[0] || firstCurrentIntersect.object == contactCube.children[0].children[1] || firstCurrentIntersect.object == contactCube.children[0].children[2] || firstCurrentIntersect.object == contactCube.children[0].children[3] || firstCurrentIntersect.object == contactCube.children[0].children[4] || firstCurrentIntersect.object == contactCube.children[0].children[5]) {
+                spinContactCube()
+
+                firstCurrentIntersect = null
+            }
+            // Landing
+            else if (firstCurrentIntersect.object == P.children[0].children[0]) {
                 animateP()
 
                 firstCurrentIntersect = null
@@ -2772,6 +2816,11 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Time Updates
+
+    // Contact Cube
+    contactCube.position.y = Math.sin(elapsedTime*0.75) * 0.1 - 50.5
+    contactCube.rotation.x = Math.sin(elapsedTime) * 0.05
+    contactCube.rotation.z = Math.cos(elapsedTime) * 0.05
     
     // Lotus
     lotus.rotation.y +=0.005
@@ -2792,16 +2841,6 @@ const tick = () =>
     scrollIndex = scrollY/window.innerHeight
 
     extraMeshRotation = (Math.sin(scrollIndex*Math.PI*2)) * - Math.PI*10/180
-
-    // waveMeshIndex = Math.abs((Math.sin(scrollIndex*Math.PI))) * 0.25
-    // console.log(waveMeshIndex)
-
-    // c1material.uniforms.uAmplitude.value = waveMeshIndex
-    // c2material.uniforms.uAmplitude.value = waveMeshIndex
-    // c3material.uniforms.uAmplitude.value = waveMeshIndex
-    // c4material.uniforms.uAmplitude.value = waveMeshIndex
-    // c5material.uniforms.uAmplitude.value = waveMeshIndex
-    // c6material.uniforms.uAmplitude.value = waveMeshIndex
 
     carouselMesh1Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation 
     carouselMesh2Group.rotation.x = -carouselGroup.rotation.x - extraMeshRotation
@@ -2894,7 +2933,7 @@ const tick = () =>
     }
 
 //  Phase 0 RayCasting
-    const firstTestBox = [P, A, T, R, I, C, K, rightNameWall, leftNameWall]
+    const firstTestBox = [P, A, T, R, I, C, K, rightNameWall, leftNameWall, contactCube]
     const firstIntersects = mainRaycaster.intersectObjects(firstTestBox)
 
     for (const firstIntersect of firstIntersects) {
@@ -3285,7 +3324,7 @@ gsap.fromTo(lotusGroup.position , {y: -35.5, x: 0, z: -5}, {
         // markers: true
     },
     y: -52.5,
-    x: 0,
+    x: 2.5,
     z: 0
     // ease: 'none',
 })
@@ -3572,17 +3611,60 @@ for (let i = 0; i < navTabs.length; i++) {
 
 // Link
 const contactSection = document.querySelector('#contactSection')
-const emailText = document.querySelector('#emailText')
+let emailText = document.querySelector('#emailText')
 
 emailText.addEventListener('mouseenter', () => {
-    contactSection.classList.add('negative')
     emailText.innerText = 'rptmunar@gmail.com'
 })
 
 emailText.addEventListener('mouseleave', () => {
-    contactSection.classList.remove('negative')
-    emailText.innerText = "Let's talk."
+    emailText.innerText = 'Wanna talk?'
 })
+
+// Contact Cube Anim
+const contactSectionArray = [
+    "<a target=”_blank” href='mailto:rptmunar@gmail.com' class='link' tabindex='-1' id='emailText'>Wanna talk?</a>",
+    "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse more of my projects.</a>",
+    "<a target=”_blank” href='https://twitter.com/LilRuii' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
+    "<a target=”_blank” href='https://www.facebook.com/rptmunar/' class='link' tabindex='-1' id='emailText'>Here, too.</a>"
+]
+
+let contactIndex  = 0
+
+const contactChanges = [
+    ['rptmunar@gmail.com', 'Wanna talk?'],
+    ['github.com/PatrickMunar', 'Browse more of my projects.'],
+    ['twitter.com/LilRuii', 'You can reach me here.'],
+    ['facebook.com/rptmunar', 'Here, too.'],
+]
+
+const spinContactCube = () => {
+    if (contactIndex < 3) {
+        contactIndex++
+    }
+    else {
+        contactIndex = 0
+    }
+
+    gsap.to(contactCube.rotation, {duration: 1, y: -Math.PI/2 + contactCube.rotation.y})
+    noClicks = true
+
+    contactSection.innerHTML = contactSectionArray[contactIndex]
+
+    emailText = document.querySelector('#emailText')
+
+    emailText.addEventListener('mouseenter', () => {
+        emailText.innerText = contactChanges[contactIndex][0]
+    })
+
+    emailText.addEventListener('mouseleave', () => {
+        emailText.innerText = contactChanges[contactIndex][1]
+    })
+
+    setTimeout(() => {
+        noClicks = false
+    }, 1000)
+}
 
 // Tick
 tick()

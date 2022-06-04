@@ -169,7 +169,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            text-shadow: 2px 2px 1px black, 2px -2px 1px black, -2px -2px 1px black, -2px 2px 1px black;
+            text-shadow: 0px 0px 1px black, 0px -0px 1px black, -0px -0px 1px black, -0px 0px 1px black;
         }
         .sliderTextSize {
             font-size: 1rem;
@@ -232,13 +232,13 @@
         .portDescription {
             font-family: 'Nunito', sans-serif;
             width: 100%;
-            font-size: 0.75rem;
+            font-size: 0.6rem;
         }
 
         .portTasks {
             font-family: 'Nunito', sans-serif;
             width: 100%;
-            font-size: 0.65rem;
+            font-size: 0.55rem;
             margin-bottom: 0.65rem;
         }
 
@@ -519,19 +519,19 @@
         white-space: nowrap;
     }
     .topDescription {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         text-align: left;
         margin-bottom: 7rem;
     }
     
     .botDescription {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         text-align: right;
         margin-bottom: 1rem;
     }
     
     .sideNote {
-        font-size: 0.75rem;
+        font-size: 0.6rem;
         text-align: center;
         font-style: italic;
         font-family: 'Merriweather', serif;
@@ -850,6 +850,7 @@ width: 10px;
     backdrop-filter: invert(100%);
     color: white;
     text-decoration: none;
+    padding: 1rem;
 }
 
 .negative {
