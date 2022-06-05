@@ -12,7 +12,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.3/ScrollTrigger.min.js"></script>	
 </head>
 <body>
-    <div class="loadingPage">Mini Survey</div>
+    <div class="loadingPage">
+        <div class="mainLoadingDiv">
+            <div class="halfLoadingBar" id="allDone">
+                <div id="allDoneText">
+                    <div class="loadingLetter">W</div>
+                    <div class="loadingLetter">E</div>
+                    <div class="loadingLetter">L</div>
+                    <div class="loadingLetter">C</div>
+                    <div class="loadingLetter" id="emoji">🙂</div>
+                    <div class="loadingLetter">M</div>
+                    <div class="loadingLetter">E</div>
+                </div>
+            </div>
+            <div class="halfLoadingBar" id="loadingMain">
+                <div class="loadingLetter">L</div>
+                <div class="loadingLetter">O</div>
+                <div class="loadingLetter">A</div>
+                <div class="loadingLetter">D</div>
+                <div class="loadingLetter">I</div>
+                <div class="loadingLetter">N</div>
+                <div class="loadingLetter">G</div>
+            </div>
+        </div>
+        <div class="loadPercent">0%</div>
+        <div class="loadingNotes"></div>
+    </div>
 
     <div class="back half topLanding">
         <div class="large Oi">Hel<t class="message">l</t>o.</div>
@@ -22,7 +47,7 @@
  
     <canvas class="mainCanvas"></canvas>
     <div class="navBar">
-        <div class="navTabs currentTab" id="nav1">HELLO</div>
+        <div class="navTabs currentTab" id="nav1">HOME</div>
         <div class="navTabs" id="nav2">ABOUT ME</div>
         <div class="navTabs" id="nav3">SKILLS</div>
         <div class="navTabs" id="nav4">PROJECTS</div>
@@ -59,8 +84,8 @@
                     <div class="sideNote">(or pick a topic from the list)</div>
                 </div>
                 <div class="descriptionDiv hidden" id="techDesc">
-                    <div class="topDescription">I mainly code with the holy trinity of web development:<br>HTML, CSS & JavaScript.</div>
-                    <div class="botDescription">I love incorporating 3D models and animations<br>with Three.js, GLSL & GSAP.</div>
+                    <div class="topDescription">I mainly code with the holy trinity of web development: HTML, CSS & JavaScript. Also did a bit of Python, C and MATLAB as an undergrad.</div>
+                    <div class="botDescription">I love incorporating 3D models and animations with Three.js, GLSL & GSAP.</div>
                     <div class="sideNote">It's always the little things that make a site awesome.</div>
                 </div>
                 <div class="descriptionDiv hidden" id="threeDDesc">

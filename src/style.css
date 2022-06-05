@@ -868,8 +868,80 @@ width: 10px;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
-    background-color: black;
-    color: white;
+    height: 120vh;
+    background-color: white;
+    color: black;
     z-index: 100000000000000000000000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20vh;
+}
+
+.mainLoadingDiv {
+    width: 100vw;
+    /* border: 2px solid yellow; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.halfLoadingBar {
+    position: absolute;
+    width: 100vw;
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.loadingLetter {
+    width: calc(100vw/7);
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-family: 'Spectral', serif;
+}
+
+#allDoneText {
+    position: relative;
+    left: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    backdrop-filter: invert(100%);
+    color: white;
+}
+
+#allDone {
+    position: absolute;
+    z-index: 1000000000000000000000;
+    /* border: 2px solid red; */
+    background-color: white;
+    right: 100vw;
+}
+
+.loadPercent {
+    position: absolute;
+    bottom: 0;
+    font-family: 'Nunito', sans-serif;
+    color: black;
+    font-size: 0.5rem;
+    margin-bottom: 20vh;
+}
+
+.loadingNotes {
+    position: absolute;
+    top: 0;
+    color: black;
+    font-size: 0.5rem;
+    margin-top: 2.5vh;
+    font-family: 'Merriweather', serif;
 }

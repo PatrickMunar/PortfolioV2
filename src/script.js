@@ -33,19 +33,35 @@ const mainScene = new THREE.Scene()
 document.body.style.overflowY = 'hidden'
 document.body.style.overflowX = 'hidden'
 const loadingPage = document.querySelector('.loadingPage')
+const loadPercent = document.querySelector('.loadPercent')
+let loadProgress = 0
 
 const loadingManager = new THREE.LoadingManager(
     // Loaded
     () => {
-        document.body.style.overflowY = 'scroll'
-        document.body.style.overflowX = 'hidden'
         setTimeout(() => {
-            loadingPage.style.display = 'none'
-        }, 100)
-        chaosName()
+            window.history.scrollRestoration = 'manual'
+            document.body.style.overflowY = 'scroll'
+            document.body.style.overflowX = 'hidden'
+            setTimeout(() => {
+                loadingPage.style.display = 'none'
+                spinRightWall()
+                setTimeout(() => {
+                    flickerText()
+                }, 3500)
+            }, 100)
+        }, 2500)
+        setTimeout(() => {
+            document.querySelector('#emoji').innerText = '😀'
+        }, 1000)
     },
     // Progress
     (itemUrl, itemsLoaded, itemsTotal) => {
+        loadProgress = (itemsLoaded/itemsTotal)
+        console.log(loadProgress)
+        gsap.to('#allDone', {x: loadProgress * window.innerWidth})
+        gsap.to('#allDoneText', {x: loadProgress * - window.innerWidth})
+        loadPercent.innerText = (loadProgress*100).toFixed(1) + ' %'
     }
 )
 
@@ -2991,14 +3007,12 @@ gsap.registerPlugin(ScrollTrigger)
 // Other Animations
 const flickerText = () => {
     const randomTime = Math.random()*0.5 + 0.5
-    const randomOpacity = Math.random()*0.15 + 0.1
+    const randomOpacity = Math.random()*0.05 + 0.05
     gsap.to('.flicker', {duration: randomTime, opacity: randomOpacity})
     setTimeout(() => {
         flickerText()
     }, randomTime*1000)
 }
-
-flickerText()
 
 // Scroll Animations
 gsap.to('#landingSection' , {
@@ -3619,6 +3633,9 @@ emailText.addEventListener('mouseenter', () => {
 
 emailText.addEventListener('mouseleave', () => {
     emailText.innerText = 'Wanna talk?'
+    setTimeout(() => {
+        spinContactCube()
+    }, 1000)
 })
 
 // Contact Cube Anim
@@ -3638,32 +3655,41 @@ const contactChanges = [
     ['facebook.com/rptmunar', 'Here, too.'],
 ]
 
+let isCCSpinning = false
+
 const spinContactCube = () => {
-    if (contactIndex < 3) {
-        contactIndex++
-    }
-    else {
-        contactIndex = 0
-    }
-
-    gsap.to(contactCube.rotation, {duration: 1, y: -Math.PI/2 + contactCube.rotation.y})
-    noClicks = true
-
-    contactSection.innerHTML = contactSectionArray[contactIndex]
-
-    emailText = document.querySelector('#emailText')
-
-    emailText.addEventListener('mouseenter', () => {
-        emailText.innerText = contactChanges[contactIndex][0]
-    })
-
-    emailText.addEventListener('mouseleave', () => {
-        emailText.innerText = contactChanges[contactIndex][1]
-    })
-
-    setTimeout(() => {
-        noClicks = false
-    }, 1000)
+    if (isCCSpinning == false) {
+        isCCSpinning = true
+        if (contactIndex < 3) {
+            contactIndex++
+        }
+        else {
+            contactIndex = 0
+        }
+    
+        gsap.to(contactCube.rotation, {duration: 1, y: -Math.PI/2 + contactCube.rotation.y})
+        noClicks = true
+    
+        contactSection.innerHTML = contactSectionArray[contactIndex]
+    
+        emailText = document.querySelector('#emailText')
+    
+        emailText.addEventListener('mouseenter', () => {
+            emailText.innerText = contactChanges[contactIndex][0]
+        })
+    
+        emailText.addEventListener('mouseleave', () => {
+            emailText.innerText = contactChanges[contactIndex][1]
+            setTimeout(() => {
+                spinContactCube()
+            }, 1000)
+        })
+    
+        setTimeout(() => {
+            noClicks = false
+            isCCSpinning = false
+        }, 1000)
+    }  
 }
 
 // Tick
