@@ -209,11 +209,10 @@ let pencil = new THREE.Group
 let wallet = new THREE.Group
 let whiteChess = new THREE.Group
 let blackChess = new THREE.Group
+
 let lotus = new THREE.Group
 let lotusOrb = new THREE.Group
 let contactCube = new THREE.Group
-
-const allObjectsArray = []
 
 allObjects.add(bottomBedframeGroup)
 allObjects.add(topBedframeGroup)
@@ -470,6 +469,8 @@ gltfLoader.load(
         // obj.scene.children[0].receiveShadow = true
     }
 )
+
+// Lotus Models
 
 gltfLoader.load(
     'LotusPetals.glb',
@@ -3639,7 +3640,7 @@ emailText.addEventListener('mouseleave', () => {
 
 // Contact Cube Anim
 const contactSectionArray = [
-    "<a target=”_blank” href='mailto:rptmunar@gmail.com' class='link' tabindex='-1' id='emailText'>Wanna talk?</a>",
+    "<a target=”_blank” href='mailto:rptmunar@gmail.com' class='link' tabindex='-1' id='emailText'>Let's talk.</a>",
     "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse more of my projects.</a>",
     "<a target=”_blank” href='https://twitter.com/LilRuii' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
     "<a target=”_blank” href='https://www.facebook.com/rptmunar/' class='link' tabindex='-1' id='emailText'>Here, too.</a>"
