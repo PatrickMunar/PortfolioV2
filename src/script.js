@@ -304,7 +304,6 @@ container.position.set(2.5*scaleFactor,0,0)
 cup.position.set(2.5*scaleFactor,0,0)
 wallet.position.set(2.5*scaleFactor,0,0)
 
-
 // Lotus Positions
 lotus.rotation.z = -Math.PI/12
 lotus.rotation.x = Math.PI/3
@@ -1634,6 +1633,33 @@ gltfLoader.load(
     }
 )
 
+// Drawer Objects
+const cubeGeometry = new THREE.BoxBufferGeometry(0.3, 0.3, 0.3)
+const cubeMaterial = new THREE.MeshNormalMaterial({
+    
+})
+const cubeDrawer = new THREE.Mesh(cubeGeometry, cubeMaterial)
+cubeDrawer.position.set(1.9, 0.25 + 2, -1.9)
+topDrawer.add(cubeDrawer)
+
+const sphereGeometry = new THREE.TetrahedronGeometry(0.3)
+const sphereMaterial = new THREE.MeshNormalMaterial({
+    
+})
+const sphereDrawer = new THREE.Mesh(sphereGeometry, sphereMaterial)
+sphereDrawer.position.set(1.9, -0.5 + 2, -1.25)
+midDrawer.add(sphereDrawer)
+
+const torusGeometry = new THREE.TorusGeometry(0.15, 0.1, 16, 100)
+const torusMaterial = new THREE.MeshNormalMaterial({
+    
+})
+const torusDrawer = new THREE.Mesh(torusGeometry, torusMaterial)
+torusDrawer.position.set(1.9, -1.25 + 2, -0.65)
+botDrawer.add(torusDrawer)
+
+console.log(topDrawer)
+
 // Lighting
 const directionalLights = new THREE.Group
 let opacities = {
@@ -2471,17 +2497,17 @@ window.addEventListener('click', () => {
 
                     currentIntersect = null
                 }
-                else if (currentIntersect.object == topDrawer.children[0].children[0]) {
+                else if (currentIntersect.object == topDrawer.children[0].children[0] || currentIntersect.object == topDrawer.children[1].children[0]) {
                     topDrawerOut()
 
                     currentIntersect = null
                 }
-                else if (currentIntersect.object == midDrawer.children[0].children[0]) {
+                else if (currentIntersect.object == midDrawer.children[0].children[0] || currentIntersect.object == midDrawer.children[1].children[0]) {
                     midDrawerOut()
 
                     currentIntersect = null
                 }
-                else if (currentIntersect.object == botDrawer.children[0].children[0]) {
+                else if (currentIntersect.object == botDrawer.children[0].children[0] || currentIntersect.object == botDrawer.children[1].children[0]) {
                     botDrawerOut()
 
                     currentIntersect = null
@@ -2831,10 +2857,19 @@ const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
 
-    // Time Updates
+    // Drawer Objects
+    torusDrawer.rotation.x += 0.013
+    torusDrawer.rotation.y += 0.04
+    torusDrawer.rotation.z += 0.057
+    sphereDrawer.rotation.x += 0.013
+    sphereDrawer.rotation.y += 0.04
+    sphereDrawer.rotation.z += 0.057
+    cubeDrawer.rotation.x += 0.013
+    cubeDrawer.rotation.y += 0.04
+    cubeDrawer.rotation.z += 0.057
 
     // Contact Cube
-    contactCube.position.y = Math.sin(elapsedTime*0.75) * 0.1 - 50.5
+    contactCube.position.y = Math.sin(elapsedTime*0.75) * 0.1 - 60
     contactCube.rotation.x = Math.sin(elapsedTime) * 0.05
     contactCube.rotation.z = Math.cos(elapsedTime) * 0.05
     
@@ -3045,7 +3080,7 @@ gsap.to(opacities , {
     ease: 'none',
 })
 
-gsap.to('#roomSection' , {
+gsap.to('#roomSection', {
     scrollTrigger: {
         trigger: '#roomSection',
         start: () =>  window.innerHeight*1 + ' bottom',
@@ -3055,6 +3090,34 @@ gsap.to('#roomSection' , {
         // pin: true,
         // markers: true
     },
+    ease: 'none',
+})
+
+gsap.fromTo('.listItem', {x: -100}, {
+    scrollTrigger: {
+        trigger: '#roomSection',
+        start: () =>  window.innerHeight*0 + ' bottom',
+        end: () =>  window.innerHeight*0 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    x: 0,
+    ease: 'none',
+})
+
+gsap.to('.roomDescription', {
+    scrollTrigger: {
+        trigger: '#roomSection',
+        start: () =>  window.innerHeight*0 + ' bottom',
+        end: () =>  window.innerHeight*0 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    opacity: 1,
     ease: 'none',
 })
 
@@ -3338,8 +3401,39 @@ gsap.fromTo(lotusGroup.position , {y: -35.5, x: 0, z: -5}, {
         // markers: true
     },
     y: -52.5,
+    x: -2.5,
+    z: 0
+    // ease: 'none',
+})
+
+gsap.fromTo(lotusGroup.position , {y: -52.5, x: -2.5, z: 0}, {
+    scrollTrigger: {
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*1 + ' bottom',
+        end: () =>  window.innerHeight*1 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    y: -62.5,
     x: 2.5,
     z: 0
+})
+
+gsap.to(lotusGroup.rotation , {
+    scrollTrigger: {
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*1 + ' bottom',
+        end: () =>  window.innerHeight*1 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    y: Math.PI,
+    x: Math.PI*0.9,
+    z: Math.PI
     // ease: 'none',
 })
 
@@ -3476,6 +3570,19 @@ gsap.fromTo('#underline5', {transform: 'scaleX(0)'}, {
     transform: 'scaleX(1)'
 })
 
+gsap.fromTo('#underline6', {transform: 'scaleX(0)'}, {
+    scrollTrigger: {
+        trigger: '#entry6',
+        start: () =>  window.innerHeight*0 + ' bottom',
+        end: () =>  window.innerHeight*0 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    transform: 'scaleX(1)'
+})
+
 gsap.fromTo(mainCamera.position, {y: -35}, {
     scrollTrigger: {
         trigger: '#contactSection',
@@ -3489,17 +3596,53 @@ gsap.fromTo(mainCamera.position, {y: -35}, {
     y: -50
 })
 
-gsap.fromTo('#underline6', {transform: 'scaleX(0)'}, {
+gsap.fromTo(mainCamera.position, {y: -50}, {
     scrollTrigger: {
-        trigger: '#entry6',
-        start: () =>  window.innerHeight*0 + ' bottom',
-        end: () =>  window.innerHeight*0 + ' top',
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*1 + ' bottom',
+        end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
         // pin: true,
         // markers: true
     },
-    transform: 'scaleX(1)'
+    y: -60
+})
+
+gsap.to('.yellowGum', {
+    scrollTrigger: {
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*1.01 + ' bottom',
+        end: () =>  window.innerHeight*1.11 + ' bottom',
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    opacity: 0
+})
+
+gsap.to('.blueGum', {
+    scrollTrigger: {
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*1.11 + ' bottom',
+        end: () =>  window.innerHeight*1.21 + ' bottom',
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    opacity: 0
+})
+
+gsap.to('.redGum', {
+    scrollTrigger: {
+        trigger: '#contactSection',
+        start: () =>  window.innerHeight*1.21 + ' bottom',
+        end: () =>  window.innerHeight*1.31 + ' bottom',
+        scrub: true,
+        // pin: true,
+        // markers: true
+    },
+    opacity: 0
 })
 
 // List Animations
@@ -3624,7 +3767,7 @@ for (let i = 0; i < navTabs.length; i++) {
 }
 
 // Link
-const contactSection = document.querySelector('#contactSection')
+const contactSection = document.querySelector('#finalSection')
 let emailText = document.querySelector('#emailText')
 
 emailText.addEventListener('mouseenter', () => {
@@ -3641,7 +3784,7 @@ emailText.addEventListener('mouseleave', () => {
 // Contact Cube Anim
 const contactSectionArray = [
     "<a target=”_blank” href='mailto:rptmunar@gmail.com' class='link' tabindex='-1' id='emailText'>Let's talk.</a>",
-    "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse more of my projects.</a>",
+    "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse my projects.</a>",
     "<a target=”_blank” href='https://twitter.com/LilRuii' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
     "<a target=”_blank” href='https://www.facebook.com/rptmunar/' class='link' tabindex='-1' id='emailText'>Here, too.</a>"
 ]
@@ -3673,7 +3816,7 @@ const spinContactCube = () => {
         contactSection.innerHTML = contactSectionArray[contactIndex]
     
         emailText = document.querySelector('#emailText')
-    
+
         emailText.addEventListener('mouseenter', () => {
             emailText.innerText = contactChanges[contactIndex][0]
         })
@@ -3689,7 +3832,7 @@ const spinContactCube = () => {
             noClicks = false
             isCCSpinning = false
         }, 1000)
-    }  
+    }
 }
 
 // Tick

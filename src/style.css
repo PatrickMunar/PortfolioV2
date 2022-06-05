@@ -722,6 +722,7 @@ body {
     justify-content: center;
     flex-direction: column;
     font-family: 'Nunito', sans-serif;
+    opacity: 0;
 }
 
 .descriptionDiv {
@@ -831,7 +832,7 @@ width: 10px;
 }
 
 /* Fonts */
-.Oi {
+.Spectral {
     font-family: 'Spectral', serif;
 }
 
@@ -842,7 +843,6 @@ width: 10px;
 .link {
     font-size: 1rem;
     font-family: 'Spectral', serif;
-    /* text-decoration: none; */
     color: black;
 }
 
@@ -860,6 +860,57 @@ width: 10px;
 
 .positive {
     color: black;
+}
+
+/* Final Section */
+#contactSection {
+    height: 200vh;
+}
+
+#gumSection {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Spectral', serif;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+#finalSection {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blueGum {
+    color: #92f5ff;
+    text-shadow: 0 0 2px black;
+}
+
+.redGum {
+    color: #ffc3c3;
+    text-shadow: 0 0 2px black;
+}
+
+.yellowGum {
+    color: #f9ff94;
+    text-shadow: 0 0 2px black;
+}
+
+.Monoton {
+    font-family: 'Monoton', cursive;
+}
+
+.Cerdaville {
+    font-family: 'Cedarville Cursive', cursive;
+}
+
+.Oi {
+    font-family: 'Oi', cursive;
 }
 
 /* Loading Page */
