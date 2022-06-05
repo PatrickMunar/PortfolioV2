@@ -3793,7 +3793,7 @@ let contactIndex  = 0
 
 const contactChanges = [
     ['rptmunar@gmail.com', "Let's talk."],
-    ['github.com/PatrickMunar', 'Browse more of my projects.'],
+    ['github.com/PatrickMunar', 'Browse my projects.'],
     ['twitter.com/LilRuii', 'You can reach me here.'],
     ['facebook.com/rptmunar', 'Here, too.'],
 ]

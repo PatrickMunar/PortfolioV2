@@ -843,6 +843,10 @@ width: 10px;
 .link {
     font-size: 1rem;
     font-family: 'Spectral', serif;
+    text-decoration: none;
+    padding: 1rem;
+    border: 2px solid black;
+    box-shadow: -5px 5px 1px black;
     color: black;
 }
 
