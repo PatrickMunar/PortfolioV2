@@ -58,7 +58,6 @@ const loadingManager = new THREE.LoadingManager(
     // Progress
     (itemUrl, itemsLoaded, itemsTotal) => {
         loadProgress = (itemsLoaded/itemsTotal)
-        console.log(loadProgress)
         gsap.to('#allDone', {x: loadProgress * window.innerWidth})
         gsap.to('#allDoneText', {x: loadProgress * - window.innerWidth})
         loadPercent.innerText = (loadProgress*100).toFixed(1) + ' %'
