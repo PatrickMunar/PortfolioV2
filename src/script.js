@@ -327,7 +327,7 @@ const removeOrb = () => {
 // Contact Cube Positions
 mainScene.add(contactCube)
 contactCube.position.set(-5,-50.5,0)
-contactCube.rotation.y = Math.PI*0.5 + Math.PI/8
+contactCube.rotation.y = Math.PI/8
 
 // Phase 0 GLTFLoader
 gltfLoader.load(
@@ -511,7 +511,7 @@ gltfLoader.load(
     (obj) => {
        
         mainScene.add(obj.scene)
-        obj.scene.scale.set(0.1,0.1,0.1)
+        obj.scene.scale.set(0.05,0.05,0.05)
 
         // 
         contactCube.add(obj.scene)
@@ -531,9 +531,6 @@ gltfLoader.load(
         obj.scene.children[4].castShadow = true
         obj.scene.children[4].receiveShadow = true
         obj.scene.children[4].frustumCulled = false
-        obj.scene.children[5].castShadow = true
-        obj.scene.children[5].receiveShadow = true
-        obj.scene.children[5].frustumCulled = false
     }
 )
 
@@ -1657,8 +1654,6 @@ const torusMaterial = new THREE.MeshNormalMaterial({
 const torusDrawer = new THREE.Mesh(torusGeometry, torusMaterial)
 torusDrawer.position.set(1.9, -1.25 + 2, -0.65)
 botDrawer.add(torusDrawer)
-
-console.log(topDrawer)
 
 // Lighting
 const directionalLights = new THREE.Group
@@ -3785,8 +3780,8 @@ emailText.addEventListener('mouseleave', () => {
 const contactSectionArray = [
     "<a target=”_blank” href='mailto:rptmunar@gmail.com' class='link' tabindex='-1' id='emailText'>Let's talk.</a>",
     "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse my projects.</a>",
-    "<a target=”_blank” href='https://twitter.com/LilRuii' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
-    "<a target=”_blank” href='https://www.facebook.com/rptmunar/' class='link' tabindex='-1' id='emailText'>Here, too.</a>"
+    "<a target=”_blank” href='https://www.linkedin.com/in/patrick-munar-79953221a/' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
+    "<a target=”_blank” href='https://twitter.com/LilRuii' class='link' tabindex='-1' id='emailText'>Here, too.</a>"
 ]
 
 let contactIndex  = 0
@@ -3794,8 +3789,8 @@ let contactIndex  = 0
 const contactChanges = [
     ['rptmunar@gmail.com', "Let's talk."],
     ['github.com/PatrickMunar', 'Browse my projects.'],
-    ['twitter.com/LilRuii', 'You can reach me here.'],
-    ['facebook.com/rptmunar', 'Here, too.'],
+    ['linkedin.com/in/patrick-munar-79953221a', 'You can reach me here.'],
+    ['twitter.com/LilRuii', 'Here, too.'],
 ]
 
 let isCCSpinning = false
