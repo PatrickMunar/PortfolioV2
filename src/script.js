@@ -3780,7 +3780,7 @@ emailText.addEventListener('mouseleave', () => {
 const contactSectionArray = [
     "<a target=”_blank” href='mailto:rptmunar@gmail.com' class='link' tabindex='-1' id='emailText'>Let's talk.</a>",
     "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse my projects.</a>",
-    "<a target=”_blank” href='https://www.linkedin.com/in/patrick-munar-79953221a/' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
+    "<a target=”_blank” href='https://www.linkedin.com/in/rptmunar/' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
     "<a target=”_blank” href='https://twitter.com/LilRuii' class='link' tabindex='-1' id='emailText'>Here, too.</a>"
 ]
 
@@ -3789,7 +3789,7 @@ let contactIndex  = 0
 const contactChanges = [
     ['rptmunar@gmail.com', "Let's talk."],
     ['github.com/PatrickMunar', 'Browse my projects.'],
-    ['linkedin.com/in/patrick-munar-79953221a', 'You can reach me here.'],
+    ['www.linkedin.com/in/rptmunar', 'You can reach me here.'],
     ['twitter.com/LilRuii', 'Here, too.'],
 ]
 
