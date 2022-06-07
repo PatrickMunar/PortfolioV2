@@ -3823,7 +3823,7 @@ emailText.addEventListener('mouseleave', () => {
 // Contact Cube Anim
 const contactSectionArray = [
     "<a target=”_blank” href='mailto:rptmunar@gmail.com' class='link' tabindex='-1' id='emailText'>Let's talk.</a>",
-    "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse my projects.</a>",
+    "<a target=”_blank” href='https://github.com/PatrickMunar' class='link' tabindex='-1' id='emailText'>Browse more projects.</a>",
     "<a target=”_blank” href='https://www.linkedin.com/in/rptmunar/' class='link' tabindex='-1' id='emailText'>You can reach me here.</a>",
     "<a target=”_blank” href='https://twitter.com/LilRuii' class='link' tabindex='-1' id='emailText'>Here, too.</a>"
 ]
