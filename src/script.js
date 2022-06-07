@@ -75,11 +75,13 @@ const loadingManager = new THREE.LoadingManager(
         setTimeout(() => {
             setTimeout(() => {
                 helloSequence()
-                loadingPage.style.display = 'none'
                 spinRightWall()
+
+                loadingPage.style.display = 'none'
                 window.history.scrollRestoration = 'manual'
                 document.body.style.overflowY = 'scroll'
                 document.body.style.overflowX = 'hidden'
+
                 bodyScrollBar.scrollTo(0, 0)
             }, 100)
         }, 2500)
@@ -528,6 +530,7 @@ gltfLoader.load(
         obj.scene.children[0].castShadow = true
         obj.scene.children[0].receiveShadow = true
         obj.scene.children[0].frustumCulled = false
+        obj.scene.children[0].material.color = new THREE.Color(0xf3f3f3)
     }
 )
 
@@ -544,6 +547,7 @@ gltfLoader.load(
         obj.scene.children[0].castShadow = true
         obj.scene.children[0].receiveShadow = true
         obj.scene.children[0].frustumCulled = false
+        obj.scene.children[0].material.color = new THREE.Color(0xff0000)
         obj.scene.children[0].material.envMap = environmentMap
         obj.scene.children[0].material.envMapIntensity = 2
     }
@@ -2510,13 +2514,12 @@ window.addEventListener('click', () => {
             }
             else if (firstCurrentIntersect.object == rightNameWall.children[0].children[0]) {
                 spinRightWall()
-                    // Picture Change
-                // changeTexture()
 
                 firstCurrentIntersect = null
             }
             else if (firstCurrentIntersect.object == leftNameWall.children[0].children[0]) {
                 spinLeftWall()
+                colorChange()
 
                 firstCurrentIntersect = null
             }
@@ -2833,6 +2836,8 @@ let jBox = 0
 const boxColors = [0xf3f3f3, 0xff0000]
 let diffBoxes = []
 let diffBoxCount = 0
+let normalBoxes = []
+let normalBoxCount = 0
 
 // Box
 const makeBox = (i, j) => {
@@ -2851,6 +2856,10 @@ const makeBox = (i, j) => {
     if (colorChance == 0) {
         diffBoxes[diffBoxCount] = boxLine
         diffBoxCount++
+    }
+    else {
+        normalBoxes[normalBoxCount] = boxLine
+        normalBoxCount++
     }
     boxLine.position.set(-30 + i*5, -85 + j*5 + 5, -10)
     boxLineGroup.add( boxLine )
@@ -3885,6 +3894,52 @@ const spinContactCube = () => {
             isCCSpinning = false
         }, 1000)
     }
+}
+
+const threeColorArray = [
+[new THREE.Color(0xff0000), new THREE.Color(0xf3f3f3)],
+[new THREE.Color(0xFC766A), new THREE.Color(0x5B84B1)],
+[new THREE.Color(0xF4DF4E), new THREE.Color(0x949398)],
+[new THREE.Color(0xF95700), new THREE.Color(0x00A4CC)],
+[new THREE.Color(0xADEFD1), new THREE.Color(0x00203F)],
+[new THREE.Color(0x97BC62), new THREE.Color(0x2C5F2D)]
+]
+const normalColorArray = ['#ff0000', '#FC766A', '#F4DF4E', 'F95700', '#ADEFD1', '#97BC62']
+
+const underlines = document.querySelectorAll('.portNameUnderline')
+const scrollTops = document.querySelectorAll('.scrollTop')
+
+let colorChangeIndex = 0
+
+// Color Change
+const colorChange = () => {
+    if (colorChangeIndex < threeColorArray.length - 1) {
+        colorChangeIndex++
+    }
+    else {
+        colorChangeIndex = 0
+    }
+
+    leftDirectionalLight.color = threeColorArray[colorChangeIndex][0]
+    rightDirectionalLight.color = threeColorArray[colorChangeIndex][1]
+    lotusOrb.children[0].children[0].material.color = threeColorArray[colorChangeIndex][0]
+    lotus.children[1].children[0].material.color = threeColorArray[colorChangeIndex][1]
+    for (let i = 0; i < diffBoxes.length; i++) {
+        diffBoxes[i].material.color = threeColorArray[colorChangeIndex][0]
+    }
+    // for (let i = 0; i < normalBoxes.length; i++) {
+    //     normalBoxes[i].material.color = threeColorArray[colorChangeIndex][1]
+    // }
+
+    for (let j = 0; j < underlines.length; j++) {
+        underlines[j].style.backgroundColor = normalColorArray[colorChangeIndex]
+        underlines[j].style.borderColor = normalColorArray[colorChangeIndex]
+    }
+    for (let j = 0; j < scrollTops.length; j++) {
+        scrollTops[j].style.textShadow = '2px 2px 1px '+ normalColorArray[colorChangeIndex] +', 2px -2px 1px '+ normalColorArray[colorChangeIndex] +', -2px -2px 1px '+ normalColorArray[colorChangeIndex] +', -2px 2px 1px '+ normalColorArray[colorChangeIndex] +''
+    }
+
+
 }
 
 // Tick
