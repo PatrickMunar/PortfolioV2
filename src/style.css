@@ -540,14 +540,21 @@
 
 body {
     background-color: white;
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    overflow-x: hidden;
     box-sizing: border-box;
     z-index: 100;
     font-size: 10px;
     box-sizing: border-box;
     /* text-shadow: 1px 1px white, -1px -1px white, -1px 1px white, 1px -1px white ; */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+body::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .mainCanvas
@@ -628,7 +635,7 @@ body {
 .middleScrollDiv {
     height: 100vh;
     width: 100vw;
-    
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;

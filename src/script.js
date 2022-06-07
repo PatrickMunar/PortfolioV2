@@ -10,10 +10,33 @@ import { BufferGeometry } from 'three'
 import vertexShader from './shaders/vertex.glsl'
 import fragmentShader from './shaders/fragment.glsl'
 import normalFragmentShader from './shaders/normalFragment.glsl'
+import Scrollbar from 'smooth-scrollbar';
 import ScrollToPlugin from "gsap/ScrollToPlugin";
 
 // Clear Scroll Memory
 window.history.scrollRestoration = 'manual'
+
+// Scroll Triggers
+gsap.registerPlugin(ScrollTrigger)
+
+// 3rd party library setup:
+const bodyScrollBar = Scrollbar.init(document.querySelector('#bodyScrollbar'), { damping: 0.1, delegateTo: document });
+
+// Tell ScrollTrigger to use these proxy getter/setter methods for the "body" element: 
+ScrollTrigger.scrollerProxy('#bodyScrollbar', {
+  scrollTop(value) {
+    if (arguments.length) {
+      bodyScrollBar.scrollTop = value; // setter
+    }
+    return bodyScrollBar.scrollTop;    // getter
+  },
+  getBoundingClientRect() {
+    return {top: 0, left: 0, width: window.innerWidth, height: window.innerHeight};
+  }
+});
+
+// when the smooth scroller updates, tell ScrollTrigger to update() too: 
+bodyScrollBar.addListener(ScrollTrigger.update);
 
 // -----------------------------------------------------------------
 /**
@@ -22,6 +45,15 @@ window.history.scrollRestoration = 'manual'
 
 // Canvas
 const mainCanvas = document.querySelector('.mainCanvas')
+
+const navBar = document.querySelector('.navBar')
+
+bodyScrollBar.addListener(({ offset }) => {  
+    mainCanvas.style.top = offset.y + 'px';
+    mainCanvas.style.left = offset.x + 'px';
+    navBar.style.top = offset.y + 'px';
+    navBar.style.left = offset.x + 'px';
+});
 
 // Scenes
 const mainScene = new THREE.Scene()
@@ -1804,10 +1836,9 @@ const mainRaycaster = new THREE.Raycaster()
 
 // Scroll
 const sectionDistance = 10
-let scrollY = 0
 
 window.addEventListener('scroll', () => {
-    scrollY = window.scrollY
+    bodyScrollBar.scrollTop = bodyScrollBar.scrollTop
 })
 
 // Mouse
@@ -2846,7 +2877,7 @@ let waveMeshIndex = 0
 let prevTime = 0
 let floatTime = 0
 
-let scrollIndex = scrollY/window.innerHeight
+let scrollIndex = bodyScrollBar.scrollTop/window.innerHeight
 
 const tick = () =>
 {
@@ -2872,19 +2903,19 @@ const tick = () =>
     lotus.rotation.y +=0.005
     lotusOrb.position.y = Math.sin(elapsedTime) * 0.2
     
-    if (scrollY >= window.innerHeight*2.5) {
+    if (bodyScrollBar.scrollTop >= window.innerHeight*2.5) {
         addOrb()
     }
-    else if (scrollY < window.innerHeight*2.5){
+    else if (bodyScrollBar.scrollTop < window.innerHeight*2.5){
         removeOrb()
     }
 
     // Camera
-    if (scrollY < window.innerHeight*4) {
-        mainCamera.position.y = 5 - scrollY / sizes.height * sectionDistance
+    if (bodyScrollBar.scrollTop < window.innerHeight*4) {
+        mainCamera.position.y = 5 - bodyScrollBar.scrollTop / sizes.height * sectionDistance
     }
 
-    scrollIndex = scrollY/window.innerHeight
+    scrollIndex = bodyScrollBar.scrollTop/window.innerHeight
 
     extraMeshRotation = (Math.sin(scrollIndex*Math.PI*2)) * - Math.PI*10/180
 
@@ -2944,23 +2975,23 @@ const tick = () =>
 
     // Site Phases
     if (isPhaseChanging == false) {
-        if (scrollY == 0) {
+        if (bodyScrollBar.scrollTop == 0) {
             sitePhase = 'HOME'
             currentTab(0)
         }
-        else if (scrollY > window.innerHeight*0 && scrollY <= window.innerHeight*1) {
+        else if (bodyScrollBar.scrollTop > window.innerHeight*0 && bodyScrollBar.scrollTop <= window.innerHeight*1) {
             sitePhase = 'ROOM'
             currentTab(1)
         }
-        else if (scrollY > window.innerHeight*1 && scrollY <= window.innerHeight*3) {
+        else if (bodyScrollBar.scrollTop > window.innerHeight*1 && bodyScrollBar.scrollTop <= window.innerHeight*3) {
             sitePhase = 'SKILLS'
             currentTab(2)
         }
-        else if (scrollY > window.innerHeight*3 && scrollY <= window.innerHeight*9) {
+        else if (bodyScrollBar.scrollTop > window.innerHeight*3 && bodyScrollBar.scrollTop <= window.innerHeight*9) {
             sitePhase = 'PORT'
             currentTab(3)
         }
-        else if (scrollY > window.innerHeight*9 && scrollY <= window.innerHeight*10) {
+        else if (bodyScrollBar.scrollTop > window.innerHeight*9 && bodyScrollBar.scrollTop <= window.innerHeight*10) {
             sitePhase = 'CONTACT'
             currentTab(4)
         }
@@ -3030,10 +3061,6 @@ const tick = () =>
     // }, 1000/240)
 }
 
-// Scroll Triggers
-gsap.registerPlugin(ScrollTrigger)
-
-
 // Other Animations
 const flickerText = () => {
     const randomTime = Math.random()*0.5 + 0.5
@@ -3052,8 +3079,8 @@ gsap.to('#landingSection' , {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     ease: 'none',
 })
@@ -3065,8 +3092,8 @@ gsap.to(opacities , {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     room: 1,
     walls: 0,
@@ -3082,8 +3109,8 @@ gsap.to('#roomSection', {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     ease: 'none',
 })
@@ -3095,8 +3122,8 @@ gsap.fromTo('.listItem', {x: -100}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     x: 0,
     ease: 'none',
@@ -3109,8 +3136,8 @@ gsap.to('.roomDescription', {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     opacity: 1,
     ease: 'none',
@@ -3123,10 +3150,24 @@ gsap.fromTo(carouselViewGroup.position, {y: -45}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -35,
+})
+
+gsap.to('.middleScrollDiv' , {
+    scrollTrigger: {
+        trigger: '#extraSection',
+        start: () =>  window.innerHeight*1 + ' bottom',
+        end: () =>  window.innerHeight*1 + ' top',
+        scrub: true,
+        pin: false,
+        anticipatepin: false,
+        markers: false
+    },
+    y: window.innerHeight,
+    ease: 'none',
 })
 
 gsap.fromTo('.sideSliderTextSize' , {opacity: 0}, {
@@ -3136,9 +3177,9 @@ gsap.fromTo('.sideSliderTextSize' , {opacity: 0}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     opacity: 1,
     ease: 'none',
@@ -3151,9 +3192,9 @@ gsap.to('#scrollTop1' , {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: -0.8/2*window.innerHeight,
     ease: 'none',
@@ -3166,9 +3207,9 @@ gsap.to('#scrollTop2' , {
         end: () =>  window.innerHeight*1 + ' top',
         // snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: -0.6/2*window.innerHeight,
     ease: 'none',
@@ -3181,9 +3222,9 @@ gsap.to('#scrollTop3' , {
         end: () =>  window.innerHeight*1 + ' top',
         // snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: -0.4/2*window.innerHeight,
     ease: 'none',
@@ -3196,9 +3237,9 @@ gsap.to('#scrollTop4' , {
         end: () =>  window.innerHeight*1 + ' top',
         // snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: -0.2/2*window.innerHeight,
     ease: 'none',
@@ -3211,9 +3252,9 @@ gsap.to('#scrollBottom1' , {
         end: () =>  window.innerHeight*1 + ' top',
         // snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: 0.2/2*window.innerHeight,
     ease: 'none',
@@ -3226,9 +3267,9 @@ gsap.to('#scrollBottom2' , {
         end: () =>  window.innerHeight*1 + ' top',
         // snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: 0.4/2*window.innerHeight,
     ease: 'none',
@@ -3241,9 +3282,9 @@ gsap.to('#scrollBottom3' , {
         end: () =>  window.innerHeight*1 + ' top',
         // snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: 0.6/2*window.innerHeight,
     ease: 'none',
@@ -3256,9 +3297,9 @@ gsap.to('#scrollBottom4' , {
         end: () =>  window.innerHeight*1 + ' top',
         // snap: 1,
         scrub: true,
-        pin: true,
-        anticipatePin: true,
-        // markers: true
+        pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     y: 0.8/2*window.innerHeight,
     ease: 'none',
@@ -3271,9 +3312,9 @@ gsap.fromTo('.topSliderText' , {x: -window.innerWidth}, {
         end: () =>  window.innerHeight*2 + ' top',
         // snap: 1,
         scrub: true,
-        // pin: true,
-        anticipatePin: true,
-        // markers: true
+        // pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     x: window.innerWidth,
     ease: 'none',
@@ -3286,9 +3327,9 @@ gsap.fromTo('.botSliderText' , {x: window.innerWidth}, {
         end: () =>  window.innerHeight*2 + ' top',
         // snap: 1,
         scrub: true,
-        // pin: true,
-        anticipatePin: true,
-        // markers: true
+        // pin: false,
+        anticipatepin: false,
+        // markers: false
     },
     x: -window.innerWidth,
     ease: 'none',
@@ -3301,8 +3342,8 @@ gsap.to('#portfolioSection' , {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     ease: 'none',
 })
@@ -3317,8 +3358,8 @@ gsap.fromTo(lotusGroup.position , {x: -3, y: -15.5, z: 0}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -25.5,
     x: 3.5,
@@ -3332,8 +3373,8 @@ gsap.to(lotusGroup.rotation , {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: Math.PI*2
     // ease: 'none',
@@ -3346,8 +3387,8 @@ gsap.fromTo(lotusGroup.position , {y: -25.5, x: 3.5, z: 0}, {
         end: () =>  window.innerHeight*2 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -35.5,
     x: 0,
@@ -3362,8 +3403,8 @@ gsap.to(lotusGroup.rotation , {
         end: () =>  window.innerHeight*2 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: Math.PI*2
     // ease: 'none',
@@ -3376,8 +3417,8 @@ gsap.to(lotusGroup.rotation , {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -Math.PI,
     x: Math.PI*0.9,
@@ -3392,8 +3433,8 @@ gsap.fromTo(lotusGroup.position , {y: -35.5, x: 0, z: -5}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -52.5,
     x: -2.5,
@@ -3408,8 +3449,8 @@ gsap.fromTo(lotusGroup.position , {y: -52.5, x: -2.5, z: 0}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -62.5,
     x: 2.5,
@@ -3423,8 +3464,8 @@ gsap.to(lotusGroup.rotation , {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: Math.PI,
     x: Math.PI*0.9,
@@ -3442,8 +3483,8 @@ gsap.to(carouselGroup.rotation, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     x: -Math.PI/3 + extraRotation
 })
@@ -3455,8 +3496,8 @@ gsap.fromTo('#underline1', {transform: 'scaleX(0)'}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     transform: 'scaleX(1)'
 })
@@ -3468,8 +3509,8 @@ gsap.fromTo(carouselGroup.rotation, {x: -Math.PI/3}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     x: -Math.PI/3*2 + extraRotation
 })
@@ -3481,8 +3522,8 @@ gsap.fromTo('#underline2', {transform: 'scaleX(0)'}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     transform: 'scaleX(1)'
 })
@@ -3494,8 +3535,8 @@ gsap.fromTo(carouselGroup.rotation, {x: -Math.PI/3*2}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     x: -Math.PI/3*3 + extraRotation
 })
@@ -3507,8 +3548,8 @@ gsap.fromTo('#underline3', {transform: 'scaleX(0)'}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     transform: 'scaleX(1)'
 })
@@ -3520,8 +3561,8 @@ gsap.fromTo(carouselGroup.rotation, {x: -Math.PI/3*3}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     x: -Math.PI/3*4 + extraRotation
 })
@@ -3533,8 +3574,8 @@ gsap.fromTo('#underline4', {transform: 'scaleX(0)'}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     transform: 'scaleX(1)'
 })
@@ -3546,8 +3587,8 @@ gsap.fromTo(carouselGroup.rotation, {x: -Math.PI/3*4}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     x: -Math.PI/3*5 + extraRotation
 })
@@ -3559,8 +3600,8 @@ gsap.fromTo('#underline5', {transform: 'scaleX(0)'}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     transform: 'scaleX(1)'
 })
@@ -3572,8 +3613,8 @@ gsap.fromTo('#underline6', {transform: 'scaleX(0)'}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     transform: 'scaleX(1)'
 })
@@ -3585,8 +3626,8 @@ gsap.fromTo(mainCamera.position, {y: -35}, {
         end: () =>  window.innerHeight*0 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -50
 })
@@ -3598,8 +3639,8 @@ gsap.fromTo(mainCamera.position, {y: -50}, {
         end: () =>  window.innerHeight*1 + ' top',
         snap: 1,
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     y: -60
 })
@@ -3610,8 +3651,8 @@ gsap.to('.yellowGum', {
         start: () =>  window.innerHeight*1.01 + ' bottom',
         end: () =>  window.innerHeight*1.11 + ' bottom',
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     opacity: 0
 })
@@ -3622,8 +3663,8 @@ gsap.to('.blueGum', {
         start: () =>  window.innerHeight*1.11 + ' bottom',
         end: () =>  window.innerHeight*1.21 + ' bottom',
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     opacity: 0
 })
@@ -3634,8 +3675,8 @@ gsap.to('.redGum', {
         start: () =>  window.innerHeight*1.21 + ' bottom',
         end: () =>  window.innerHeight*1.31 + ' bottom',
         scrub: true,
-        // pin: true,
-        // markers: true
+        // pin: false,
+        // markers: false
     },
     opacity: 0
 })
