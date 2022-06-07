@@ -303,7 +303,8 @@ allObjects.add(pencil)
 allObjects.add(wallet)
 allObjects.add(whiteChess)
 allObjects.add(blackChess)
-allObjects.add(lotus)
+
+mainScene.add(lotus)
 
 allObjects.position.set (0,3.75-10,0)
 allObjects.scale.set (0.75,0.75,0.75)
@@ -3093,6 +3094,38 @@ const flickerText = () => {
 }
 
 // Scroll Animations
+const lettersArray = [P, A, T, R, I, C, K, leftNameWall, rightNameWall]
+
+for (let i = 0; i < lettersArray.length; i++) {
+    gsap.to(lettersArray[i].position , {
+        scrollTrigger: {
+            trigger: '#landingSection',
+            start: () =>  window.innerHeight*1 + ' bottom',
+            end: () =>  window.innerHeight*1 + ' top',
+            snap: 1,
+            scrub: true,
+            // pin: false,
+            // markers: false
+        },
+        y: lettersArray[i].position.y + Math.random()*20,
+        ease: 'none',
+    })
+}
+
+gsap.fromTo(allObjects.rotation , {y: -Math.PI/4 + Math.PI}, {
+    scrollTrigger: {
+        trigger: '#landingSection',
+        start: () =>  window.innerHeight*1 + ' bottom',
+        end: () =>  window.innerHeight*1 + ' top',
+        snap: 1,
+        scrub: true,
+        // pin: false,
+        // markers: false
+    },
+    y: -Math.PI/4 + Math.PI*2,
+    ease: 'none',
+})
+
 gsap.to('#landingSection' , {
     scrollTrigger: {
         trigger: '#landingSection',
