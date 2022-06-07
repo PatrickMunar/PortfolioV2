@@ -74,15 +74,13 @@ const loadingManager = new THREE.LoadingManager(
     () => {
         setTimeout(() => {
             setTimeout(() => {
+                helloSequence()
                 loadingPage.style.display = 'none'
                 spinRightWall()
                 window.history.scrollRestoration = 'manual'
                 document.body.style.overflowY = 'scroll'
                 document.body.style.overflowX = 'hidden'
                 bodyScrollBar.scrollTo(0, 0)
-                setTimeout(() => {
-                    flickerText()
-                }, 3500)
             }, 100)
         }, 2500)
         setTimeout(() => {
@@ -97,6 +95,17 @@ const loadingManager = new THREE.LoadingManager(
         loadPercent.innerText = (loadProgress*100).toFixed(1) + ' %'
     }
 )
+
+// Hello Sequence 
+const helloSequence = () => {
+    gsap.fromTo('.hello', {opacity: 0, x: -20}, {duration: 1, delay: 1, opacity: 1, x: 0})
+    gsap.fromTo('.I', {opacity: 0}, {duration: 1, delay: 2.5, opacity: 1})
+    gsap.fromTo('.am', {opacity: 0, x: 20}, {duration: 1, delay: 3, opacity: 1, x: 0})
+    gsap.fromTo('.botLanding', {opacity: 0, y: 20}, {duration: 1, delay: 5, opacity: 1, y: 0})
+    setTimeout(() => {
+        flickerText()
+    }, 7000)
+}
 
 // EnvMap
 const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
@@ -3117,19 +3126,23 @@ gsap.to('#roomSection', {
     ease: 'none',
 })
 
-gsap.fromTo('.listItem', {x: -100}, {
-    scrollTrigger: {
-        trigger: '#roomSection',
-        start: () =>  window.innerHeight*0 + ' bottom',
-        end: () =>  window.innerHeight*0 + ' top',
-        snap: 1,
-        scrub: true,
-        // pin: false,
-        // markers: false
-    },
-    x: 0,
-    ease: 'none',
-})
+const listItems = ['#tech', '#threeD', '#ed', '#draw', '#game', '#mns', '#music', '#ff', '#chess', '#skate']
+
+for (let i = 0; i < listItems.length; i++) {
+    gsap.fromTo(listItems[i], {x: -200}, {
+        scrollTrigger: {
+            trigger: '#roomSection',
+            start: () =>  window.innerHeight*0 + ' bottom',
+            end: () =>  window.innerHeight*0 + ' top',
+            snap: 1,
+            scrub: i*0.5,
+            // pin: false,
+            // markers: false
+        },
+        x: 0,
+        ease: 'none',
+    })
+}
 
 gsap.to('.roomDescription', {
     scrollTrigger: {
@@ -3684,7 +3697,6 @@ gsap.to('.redGum', {
 })
 
 // List Animations
-const listItems = ['#tech', '#threeD', '#ed', '#draw', '#game', '#mns', '#music', '#ff', '#chess', '#skate']
 const descriptionDiv = ['#default', '#techDesc', '#threeDDesc', '#edDesc', '#drawDesc', '#gameDesc', '#mnsDesc', '#musicDesc', '#ffDesc', '#chessDesc', '#skateDesc']
 let currentList = -1
 
