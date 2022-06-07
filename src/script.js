@@ -3781,19 +3781,19 @@ for (let i = 0; i < navTabs.length; i++) {
     navTabs[i].addEventListener('click', () => {
         currentTab(i)
         if (i == 0) {
-            gsap.to(window, {duration: 1, scrollTo: 0})
+            bodyScrollBar.scrollTo(0, 0)
         }
         else if (i == 1) {
-            gsap.to(window, {duration: 1, scrollTo: window.innerHeight*1})
+            bodyScrollBar.scrollTo(0, window.innerHeight*1)
         }
         else if (i == 2) {
-            gsap.to(window, {duration: 1, scrollTo: window.innerHeight*2})
+            bodyScrollBar.scrollTo(0, window.innerHeight*2)
         }
         else if (i == 3) {
-            gsap.to(window, {duration: 1, scrollTo: window.innerHeight*4})
+            bodyScrollBar.scrollTo(0, window.innerHeight*4)
         }
         else if (i == 4) {
-            gsap.to(window, {duration: 1, scrollTo: window.innerHeight*10})
+            bodyScrollBar.scrollTo(0, window.innerHeight*10)
         }
         isPhaseChanging = true
         setTimeout(() => {
