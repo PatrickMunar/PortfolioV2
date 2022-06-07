@@ -93,6 +93,7 @@ const loadingManager = new THREE.LoadingManager(
         gsap.to('#allDone', {x: loadProgress * window.innerWidth})
         gsap.to('#allDoneText', {x: loadProgress * - window.innerWidth})
         loadPercent.innerText = (loadProgress*100).toFixed(1) + ' %'
+        gsap.to(loadPercent, {fontSize: (loadProgress * 1.5) + 0.5 +'rem'})
     }
 )
 
