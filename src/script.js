@@ -3931,16 +3931,25 @@ const spinContactCube = () => {
 
 const threeColorArray = [
 [new THREE.Color(0xff0000), new THREE.Color(0xf3f3f3)],
-[new THREE.Color(0xFC766A), new THREE.Color(0x5B84B1)],
+[new THREE.Color(0x5B84B1), new THREE.Color(0xFC766A)],
 [new THREE.Color(0xF4DF4E), new THREE.Color(0x949398)],
 [new THREE.Color(0xF95700), new THREE.Color(0x00A4CC)],
 [new THREE.Color(0xADEFD1), new THREE.Color(0x00203F)],
 [new THREE.Color(0x97BC62), new THREE.Color(0x2C5F2D)]
 ]
-const normalColorArray = ['#ff0000', '#FC766A', '#F4DF4E', 'F95700', '#ADEFD1', '#97BC62']
+
+const normalColorArray = [
+['#ff0000', '#000000'],
+['#5B84B1', '#FC766A'],
+['#F4DF4E', '#949398'],
+['#F95700', '#00A4CC'],
+['#ADEFD1', '#00203F'],
+['#97BC62', '#2C5F2D']
+]
 
 const underlines = document.querySelectorAll('.portNameUnderline')
 const scrollTops = document.querySelectorAll('.scrollTop')
+const scrollBottoms = document.querySelectorAll('.scrollBottom')
 
 let colorChangeIndex = 0
 
@@ -3965,14 +3974,15 @@ const colorChange = () => {
     // }
 
     for (let j = 0; j < underlines.length; j++) {
-        underlines[j].style.backgroundColor = normalColorArray[colorChangeIndex]
-        underlines[j].style.borderColor = normalColorArray[colorChangeIndex]
+        underlines[j].style.backgroundColor = normalColorArray[colorChangeIndex][0]
+        underlines[j].style.borderColor = normalColorArray[colorChangeIndex][0]
     }
     for (let j = 0; j < scrollTops.length; j++) {
-        scrollTops[j].style.textShadow = '2px 2px 1px '+ normalColorArray[colorChangeIndex] +', 2px -2px 1px '+ normalColorArray[colorChangeIndex] +', -2px -2px 1px '+ normalColorArray[colorChangeIndex] +', -2px 2px 1px '+ normalColorArray[colorChangeIndex] +''
+        scrollTops[j].style.textShadow = '2px 2px 1px '+ normalColorArray[colorChangeIndex][0] +', 2px -2px 1px '+ normalColorArray[colorChangeIndex][0] +', -2px -2px 1px '+ normalColorArray[colorChangeIndex][0] +', -2px 2px 1px '+ normalColorArray[colorChangeIndex][0] +''
     }
-
-
+    for (let j = 0; j < scrollBottoms.length; j++) {
+        scrollBottoms[j].style.textShadow = '2px 2px 1px '+ normalColorArray[colorChangeIndex][1] +', 2px -2px 1px '+ normalColorArray[colorChangeIndex][1] +', -2px -2px 1px '+ normalColorArray[colorChangeIndex][1] +', -2px 2px 1px '+ normalColorArray[colorChangeIndex][1] +''
+    }
 }
 
 // Tick
