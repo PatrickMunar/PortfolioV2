@@ -45,15 +45,17 @@ bodyScrollBar.addListener(ScrollTrigger.update);
 
 // Canvas
 const mainCanvas = document.querySelector('.mainCanvas')
-
 const navBar = document.querySelector('.navBar')
+const loadingPage = document.querySelector('.loadingPage')
 
 bodyScrollBar.addListener(({ offset }) => {  
     mainCanvas.style.top = offset.y + 'px';
-    mainCanvas.style.left = offset.x + 'px';
     navBar.style.top = offset.y + 'px';
-    navBar.style.left = offset.x + 'px';
+    loadingPage.style.top = offset.y + 'px';
+ 
 });
+
+bodyScrollBar.track.xAxis.element.remove()
 
 // Scenes
 const mainScene = new THREE.Scene()
@@ -64,7 +66,6 @@ const mainScene = new THREE.Scene()
 // Loading Manager
 document.body.style.overflowY = 'hidden'
 document.body.style.overflowX = 'hidden'
-const loadingPage = document.querySelector('.loadingPage')
 const loadPercent = document.querySelector('.loadPercent')
 let loadProgress = 0
 
@@ -72,12 +73,13 @@ const loadingManager = new THREE.LoadingManager(
     // Loaded
     () => {
         setTimeout(() => {
-            window.history.scrollRestoration = 'manual'
-            document.body.style.overflowY = 'scroll'
-            document.body.style.overflowX = 'hidden'
             setTimeout(() => {
                 loadingPage.style.display = 'none'
                 spinRightWall()
+                window.history.scrollRestoration = 'manual'
+                document.body.style.overflowY = 'scroll'
+                document.body.style.overflowX = 'hidden'
+                bodyScrollBar.scrollTo(0, 0)
                 setTimeout(() => {
                     flickerText()
                 }, 3500)
@@ -3790,6 +3792,7 @@ for (let i = 0; i < navTabs.length; i++) {
             bodyScrollBar.scrollTo(0, window.innerHeight*2)
         }
         else if (i == 3) {
+            bodyScrollBar.scrollTo(0, window.innerHeight*10)
             bodyScrollBar.scrollTo(0, window.innerHeight*4)
         }
         else if (i == 4) {

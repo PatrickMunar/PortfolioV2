@@ -9,6 +9,11 @@
     background-color: red;
 }
 
+html, body {
+    max-width: 100%;
+    overflow: auto;
+}
+
 .message::selection {
     color: red;
     background-color: transparent;
@@ -41,6 +46,8 @@
     @media screen and ( max-width: 1400px ) {
         html {
             font-size: 30px;
+            max-width: 100%;
+            overflow: auto;
         }
 
         .portName {
@@ -197,6 +204,8 @@
     @media screen and ( min-width: 1400px ) {
         html {
             font-size: 50px;
+            max-width: 100%;
+            overflow: auto;
         }
 
         .portName {
@@ -356,6 +365,8 @@
   @media (orientation: portrait) {
     html {
         font-size: 20px;
+        max-width: 100%;
+        overflow: auto;
     }
 
     .portName {
@@ -550,7 +561,6 @@ body {
     scrollbar-width: none;  /* Firefox */
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
 }
 
 body::-webkit-scrollbar { 
