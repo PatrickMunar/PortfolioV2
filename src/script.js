@@ -3867,11 +3867,15 @@ const contactSection = document.querySelector('#finalSection')
 let emailText = document.querySelector('#emailText')
 
 emailText.addEventListener('mouseenter', () => {
+    emailText.style.backgroundColor = normalColorArray[colorChangeIndex][0]
+    emailText.style.color = normalColorArray[colorChangeIndex][1]
     emailText.innerText = 'rptmunar@gmail.com'
 })
 
 emailText.addEventListener('mouseleave', () => {
     emailText.innerText = 'Wanna talk?'
+    emailText.style.backgroundColor = 'transparent'
+    emailText.style.color = 'black'
     setTimeout(() => {
         spinContactCube()
     }, 1000)
@@ -3913,12 +3917,19 @@ const spinContactCube = () => {
     
         emailText = document.querySelector('#emailText')
 
+        emailText.style.borderColor = normalColorArray[colorChangeIndex][1]
+        emailText.style.boxShadow = '-5px 5px 1px' + normalColorArray[colorChangeIndex][1] +''
+
         emailText.addEventListener('mouseenter', () => {
+            emailText.style.backgroundColor = normalColorArray[colorChangeIndex][0]
+            emailText.style.color = normalColorArray[colorChangeIndex][1]
             emailText.innerText = contactChanges[contactIndex][0]
         })
     
         emailText.addEventListener('mouseleave', () => {
             emailText.innerText = contactChanges[contactIndex][1]
+            emailText.style.backgroundColor = 'transparent'
+            emailText.style.color = 'black'
             setTimeout(() => {
                 spinContactCube()
             }, 1000)
@@ -3953,6 +3964,8 @@ const underlines = document.querySelectorAll('.portNameUnderline')
 const scrollTops = document.querySelectorAll('.scrollTop')
 const scrollBottoms = document.querySelectorAll('.scrollBottom')
 const dashes = document.querySelectorAll('.dash')
+const linkProjects = document.querySelectorAll('.linkProject')
+const links = document.querySelectorAll('.link')
 
 let colorChangeIndex = 0
 
@@ -3989,6 +4002,23 @@ const colorChange = () => {
     for (let j = 0; j < dashes.length; j++) {
         dashes[j].style.color = normalColorArray[colorChangeIndex][0]
     }
+    for (let j = 0; j < linkProjects.length; j++) {
+        linkProjects[j].style.borderColor = normalColorArray[colorChangeIndex][1]
+        linkProjects[j].style.boxShadow = '-5px 5px 1px' + normalColorArray[colorChangeIndex][1] +''
+    }
+    emailText.style.borderColor = normalColorArray[colorChangeIndex][1]
+    emailText.style.boxShadow = '-5px 5px 1px' + normalColorArray[colorChangeIndex][1] +''
+}
+
+for (let j = 0; j < linkProjects.length; j++) {
+    linkProjects[j].addEventListener('mouseenter', () => {
+        linkProjects[j].style.backgroundColor = normalColorArray[colorChangeIndex][0]
+        linkProjects[j].style.color = normalColorArray[colorChangeIndex][1]
+    })
+    linkProjects[j].addEventListener('mouseleave', () => {
+        linkProjects[j].style.backgroundColor = 'transparent'
+        linkProjects[j].style.color = 'black'
+    })
 }
 
 // Tick

@@ -867,29 +867,14 @@ width: 10px;
     color: black;
 }
 
-.link:hover {
-    backdrop-filter: invert(100%);
-    color: white;
-    text-decoration: none;
-    padding: 1rem;
-}
-
-
 .linkProject {
     font-family: 'Spectral', serif;
     text-decoration: none;
     padding: 0.2rem;
-    border: 2px solid black;
+    border: 2px solid red;
     box-shadow: -5px 5px 1px black;
     color: black;
     background-color: white;
-}
-
-.linkProject:hover {
-    background-color: black;
-    color: white;
-    text-decoration: none;
-    padding: 0.2rem;
 }
 
 .negative {
