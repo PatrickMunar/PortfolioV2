@@ -1774,7 +1774,7 @@ const savedSizes = {
 }
 
 if (window.innerHeight > window.innerWidth) {
-    zoomFactor = 3.5
+    zoomFactor = 3
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
     savedSizes.width = sizes.height
@@ -1796,7 +1796,7 @@ window.addEventListener('resize', () => {
     if (window.innerHeight > window.innerWidth) {
         // sizes.width = savedSizes.height
         // sizes.height = savedSizes.width
-        zoomFactor = 3.5
+        zoomFactor = 3
             // Update mainCamera
         mainCamera.aspect = sizes.width / sizes.height
         mainCamera.position.z = 10*zoomFactor
