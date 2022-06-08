@@ -1774,7 +1774,7 @@ const savedSizes = {
 }
 
 if (window.innerHeight > window.innerWidth) {
-    zoomFactor =465/45
+    zoomFactor = 3.5
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
     savedSizes.width = sizes.height
@@ -1796,10 +1796,11 @@ window.addEventListener('resize', () => {
     if (window.innerHeight > window.innerWidth) {
         // sizes.width = savedSizes.height
         // sizes.height = savedSizes.width
-        zoomFactor = 10
+        zoomFactor = 3.5
             // Update mainCamera
         mainCamera.aspect = sizes.width / sizes.height
-        mainCamera.fov = 465;
+        mainCamera.position.z = 10*zoomFactor
+        // mainCamera.fov = 465;
         renderers[0].setSize(sizes.width, sizes.height)
         renderers[0].setPixelRatio(Math.min(window.devicePixelRatio, 2))
         mainCamera.updateProjectionMatrix();
@@ -1809,6 +1810,7 @@ window.addEventListener('resize', () => {
         // sizes.height = savedSizes.height
         zoomFactor = 1
             // Update mainCamera
+        mainCamera.position.z = 10*zoomFactor
         mainCamera.aspect = sizes.width / sizes.height
         mainCamera.fov = 45;
         renderers[0].setSize(sizes.width, sizes.height)
@@ -1819,8 +1821,8 @@ window.addEventListener('resize', () => {
 
 // Camera
 const mainCamera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100)
-mainCamera.position.set(0, 5, 10)
-mainCamera.fov = 45 * zoomFactor;
+mainCamera.position.set(0, 5, 10*zoomFactor)
+mainCamera.fov = 45;
 mainCamera.updateProjectionMatrix();
 mainScene.add(mainCamera)
 mainCamera.add(roomPointLight)
@@ -3950,6 +3952,7 @@ const normalColorArray = [
 const underlines = document.querySelectorAll('.portNameUnderline')
 const scrollTops = document.querySelectorAll('.scrollTop')
 const scrollBottoms = document.querySelectorAll('.scrollBottom')
+const dashes = document.querySelectorAll('.dash')
 
 let colorChangeIndex = 0
 
@@ -3982,6 +3985,9 @@ const colorChange = () => {
     }
     for (let j = 0; j < scrollBottoms.length; j++) {
         scrollBottoms[j].style.textShadow = '2px 2px 1px '+ normalColorArray[colorChangeIndex][1] +', 2px -2px 1px '+ normalColorArray[colorChangeIndex][1] +', -2px -2px 1px '+ normalColorArray[colorChangeIndex][1] +', -2px 2px 1px '+ normalColorArray[colorChangeIndex][1] +''
+    }
+    for (let j = 0; j < dashes.length; j++) {
+        dashes[j].style.color = normalColorArray[colorChangeIndex][0]
     }
 }
 
