@@ -131,9 +131,9 @@ pictures[2] = textureLoader.load('./images/Coding.png')
 
 const carouselPics = []
 carouselPics[0] = textureLoader.load('./images/Flagle.png')
-carouselPics[1] = textureLoader.load('./images/Gabito.png')
-carouselPics[2] = textureLoader.load('./images/LDR.png')
-carouselPics[3] = textureLoader.load('./images/Nacho.png')
+carouselPics[1] = textureLoader.load('./images/Effects.png')
+carouselPics[2] = textureLoader.load('./images/Gabito.png')
+carouselPics[3] = textureLoader.load('./images/LDR.png')
 carouselPics[4] = textureLoader.load('./images/Shaders.png')
 carouselPics[5] = textureLoader.load('./images/Portfolio.png')
 
@@ -3981,6 +3981,7 @@ const colorChange = () => {
     leftDirectionalLight.color = threeColorArray[colorChangeIndex][0]
     rightDirectionalLight.color = threeColorArray[colorChangeIndex][1]
     lotusOrb.children[0].children[0].material.color = threeColorArray[colorChangeIndex][0]
+    lotusOrb.children[0].children[0].material.envMap = environmentMap
     lotus.children[1].children[0].material.color = threeColorArray[colorChangeIndex][1]
     for (let i = 0; i < diffBoxes.length; i++) {
         diffBoxes[i].material.color = threeColorArray[colorChangeIndex][0]
